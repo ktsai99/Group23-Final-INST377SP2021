@@ -6,7 +6,8 @@ import db from '../database/initializeDB.js';
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', (req, res) => 
+{
   res.send('Movies API');
 });
 
@@ -36,8 +37,9 @@ router.get('/movies/:movie_id', async (req, res) =>
   try 
   {
     const movie = await db.Movies.findAll({
-      where: {
-        movie_id: req.params.movie_id
+      where: 
+      {
+        catalogue_id: req.params.movie_id
       }
     });
 
@@ -59,8 +61,8 @@ router.get('/movies/:range_start/:range_end', async (req, res) =>
       where: {
         [Op.between]: 
         [
-          { movie_id: range_start },
-          { movie_id: range_end }
+          { catalogue_id: range_start },
+          { catalogue_id: range_end }
         ]
       }
     });
@@ -86,7 +88,7 @@ router.post('/movies', async (req, res) =>
     // What is the point of category id
     // Code validation maybe?
     const newMovie = await db.Movies.create({
-      movie_id: currentId,
+      catalogue_id: currentId,
       category_id: req.body.category_id,
       movie_title: req.body.movie_title,
       pricing: req.body.pricing,
@@ -117,7 +119,7 @@ router.delete('/movies/:movie_id', async (req, res) =>
     await db.Movies.destroy({
       where: 
       {
-        movie_id: req.params.movie_id
+        catalogue_id: req.params.movie_id
       }
     });
     res.send('Successfully Deleted');
@@ -151,7 +153,7 @@ router.put('/movies', async (req, res) =>
       {
         where: 
         {
-          movie_id: req.body.movie_id
+          catalogue_id: req.body.movie_id
         }
       }
     );
@@ -287,8 +289,243 @@ router.put('/customers', async (req, res) =>
   }
 });
 
-// Gets for studio, rating, genre(?)
+// Endpoints to pass all other database records to front end
 
+// Ratings
+
+// Get all ratings
+router.get('/ratings', async (req, res) => 
+{
+  try 
+  {
+    const ratings = await db.Movies.findAll();
+    const reply = ratings.length > 0 ? { data: ratings } : { message: 'no results found' };
+    res.json(reply);
+  } 
+  catch (err) 
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+// Get a specifc rating by id
+router.get('/ratings/:rating_id', async (req, res) => 
+{
+  try 
+  {
+    const rating = await db.Movies.findAll({
+      where: 
+      {
+        rating_id: req.params.rating_id
+      }
+    });
+
+    res.json(rating);
+  } 
+  catch (err) 
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+// Categories
+
+// Get all categories
+router.get('/categories', async (req, res) => 
+{
+  try 
+  {
+    const categories = await db.Categories.findAll();
+    const reply = categories.length > 0 ? { data: catagories } : { message: 'no results found' };
+    res.json(reply);
+  } 
+  catch (err) 
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+// Get a specifc category by id
+router.get('/categories/:category_id', async (req, res) => 
+{
+  try 
+  {
+    const category = await db.Categories.findAll({
+      where: 
+      {
+        catalogue_id: req.params.category_id
+      }
+    });
+
+    res.json(category);
+  } 
+  catch (err) 
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+// Genre
+
+// Get all genres
+router.get('/genres', async (req, res) => 
+{
+  try 
+  {
+    const genres = await db.Genres.findAll();
+    const reply = genres.length > 0 ? { data: genres } : { message: 'no results found' };
+    res.json(reply);
+  } 
+  catch (err) 
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+// Get a specifc genre by id
+router.get('/genre/:genre_id', async (req, res) => 
+{
+  try 
+  {
+    const genre = await db.Genres.findAll({
+      where: 
+      {
+        genre_id: req.params.genre_id
+      }
+    });
+
+    res.json(genre);
+  } 
+  catch (err) 
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+// Invoices
+
+// Get all invoices
+router.get('/invoices', async (req, res) => 
+{
+  try 
+  {
+    const invoices = await db.Invoices.findAll();
+    const reply = invoices.length > 0 ? { data: invoices } : { message: 'no results found' };
+    res.json(reply);
+  } 
+  catch (err) 
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+// Get a specifc invoice by id
+router.get('/invoices/:invoice_id', async (req, res) => 
+{
+  try 
+  {
+    const invoice = await db.Invoices.findAll({
+      where: 
+      {
+        invoice_id: req.params.invoice_id
+      }
+    });
+
+    res.json(invoice);
+  } 
+  catch (err) 
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+// Rental info
+
+// Don't know if we should really be exposing things like this, but the assignment said to make all records available.
+
+// Get all rental info
+router.get('/rentals', async (req, res) => 
+{
+  try 
+  {
+    const rentals = await db.Rental_info.findAll();
+    const reply = rentals.length > 0 ? { data: rentals } : { message: 'no results found' };
+    res.json(reply);
+  } 
+  catch (err) 
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+// Get a specifc rental by confirmation number
+router.get('/rentals/:confirmation_number', async (req, res) => 
+{
+  try 
+  {
+    const rental = await db.Rental_info.findAll({
+      where: 
+      {
+        confirmation_num: req.params.confirmation_number
+      }
+    });
+
+    res.json(rental);
+  } 
+  catch (err) 
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+// Studio
+
+// Get all studios
+router.get('/studios', async (req, res) => 
+{
+  try 
+  {
+    const studios = await db.Studios.findAll();
+    const reply = studios.length > 0 ? { data: studios } : { message: 'no results found' };
+    res.json(reply);
+  } 
+  catch (err) 
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+// Get a specifc studio by id
+router.get('/studios/:studio_id', async (req, res) => 
+{
+  try 
+  {
+    const studio = await db.Studios.findAll({
+      where: 
+      {
+        studio_id: req.params.studio_id
+      }
+    });
+
+    res.json(studio);
+  } 
+  catch (err) 
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
 
 // Kept this for a useful example - maybe?
 
