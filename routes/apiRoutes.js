@@ -7,123 +7,196 @@ import db from '../database/initializeDB.js';
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.send('Welcome to the UMD Dining API!');
+  res.send('Movies API');
 });
 
-/// /////////////////////////////////
-/// ////Dining Hall Endpoints////////
-/// /////////////////////////////////
-router.get('/dining', async (req, res) => {
-  try {
-    const halls = await db.DiningHall.findAll();
-    const reply = halls.length > 0 ? { data: halls } : { message: 'no results found' };
+//
+// Movies Endpoints
+//
+
+// Get all movies
+router.get('/movies', async (req, res) => 
+{
+  try 
+  {
+    const movies = await db.Movies.findAll();
+    const reply = movies.length > 0 ? { data: movies } : { message: 'no results found' };
     res.json(reply);
-  } catch (err) {
+  } 
+  catch (err) 
+  {
     console.error(err);
     res.error('Server error');
   }
 });
 
-router.get('/dining/:hall_id', async (req, res) => {
-  try {
-    const hall = await db.DiningHall.findAll({
+// Get a specifc movie by id
+router.get('/movies/:movie_id', async (req, res) => 
+{
+  try 
+  {
+    const movie = await db.Movies.findAll({
       where: {
-        hall_id: req.params.hall_id
+        movie_id: req.params.movie_id
       }
     });
 
-    res.json(hall);
-  } catch (err) {
+    res.json(movie);
+  } 
+  catch (err) 
+  {
     console.error(err);
     res.error('Server error');
   }
 });
 
-router.post('/dining', async (req, res) => {
-  const halls = await db.DiningHall.findAll();
-  const currentId = (await halls.length) + 1;
-  try {
-    const newDining = await db.DiningHall.create({
-      hall_id: currentId,
-      hall_name: req.body.hall_name,
-      hall_address: req.body.hall_address,
-      hall_lat: req.body.hall_lat,
-      hall_long: req.body.hall_long
-    });
-    res.json(newDining);
-  } catch (err) {
-    console.error(err);
-    res.error('Server error');
-  }
-});
-
-router.delete('/dining/:hall_id', async (req, res) => {
-  try {
-    await db.DiningHall.destroy({
+// Get a range of movies by id
+router.get('/movies/:range_start/:range_end', async (req, res) => 
+{
+  try 
+  {
+    const movie = await db.Movies.findAll({
       where: {
-        hall_id: req.params.hall_id
+        [Op.between]: 
+        [
+          { movie_id: range_start },
+          { movie_id: range_end }
+        ]
+      }
+    });
+
+    res.json(movie);
+  } 
+  catch (err) 
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+// Search for movies other variables, such as name, etc. Handle this here or on front-end?
+
+// Add a new Movie to database
+router.post('/movies', async (req, res) => 
+{
+  const movies = await db.Movies.findAll();
+  const currentId = (await movies.length) + 1;
+  try 
+  {
+    // I don't know all the params to put here since no one botherd to respond and give me a diagram of the database tables.
+    const newMovie = await db.Movies.create({
+      movie_id: currentId,
+      movie_title: req.body.movie_title,
+      imdb_rating: req.body.imdb_rating,
+      duration: req.body.duration
+    });
+    res.json(newMovie);
+  } 
+  
+  catch (err) 
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+// Delete a movie from the database
+router.delete('/movies/:movie_id', async (req, res) => 
+{
+  try 
+  {
+    await db.Movies.destroy({
+      where: {
+        movie_id: req.params.movie_id
       }
     });
     res.send('Successfully Deleted');
-  } catch (err) {
+  } 
+  catch (err) 
+  {
     console.error(err);
     res.error('Server error');
   }
 });
 
-router.put('/dining', async (req, res) => {
-  try {
-    await db.DiningHall.update(
+// Update a movie in the database
+router.put('/movies', async (req, res) => 
+{
+  try 
+  {
+    await db.Movies.update(
       {
-        hall_name: req.body.hall_name,
-        hall_location: req.body.hall_location
+        movie_title: req.body.movie_title,
+        imdb_rating: req.body.imdb_rating,
+        duration: req.body.duration
       },
       {
         where: {
-          hall_id: req.body.hall_id
+          movie_id: req.body.movie_id
         }
       }
     );
     res.send('Successfully Updated');
-  } catch (err) {
+  } 
+  catch (err) 
+  {
     console.error(err);
     res.error('Server error');
   }
 });
 
-/// /////////////////////////////////
-/// ////////Meals Endpoints//////////
-/// /////////////////////////////////
-router.get('/meals', async (req, res) => {
-  try {
-    const meals = await db.Meals.findAll();
-    res.json(meals);
-  } catch (err) {
+//
+// Customers Endpoints
+//
+
+// Get all customers
+router.get('/customers', async (req, res) => 
+{
+  try 
+  {
+    const customers = await db.Customers.findAll();
+    res.json(customers);
+  } 
+  catch (err) 
+  {
     console.error(err);
     res.error('Server error');
   }
 });
 
-router.get('/meals/:meal_id', async (req, res) => {
-  try {
-    const meals = await db.Meals.findAll({
+// Get a specific customer by id
+router.get('/customers/:customer_id', async (req, res) => 
+{
+  try 
+  {
+    const customers = await db.Customers.findAll({
       where: {
-        meal_id: req.params.meal_id
+        customer_id: req.params.customer_id
       }
     });
     res.json(meals);
-  } catch (err) {
+  } 
+  
+  catch (err) 
+  {
     console.error(err);
     res.error('Server error');
   }
 });
 
-router.put('/meals', async (req, res) => {
-  try {
-    await db.Meals.update(
+// Add a customer to database
+
+// Delete a customer from database
+
+// Update a customer's record
+router.put('/customers', async (req, res) => 
+{
+  try 
+  {
+    await db.Customers.update(
       {
-        meal_name: req.body.meal_name,
-        meal_category: req.body.meal_category
+        customer_name: req.body.customer_name,
+        customer_address: req.body.customer_address
       },
       {
         where: {
@@ -131,94 +204,16 @@ router.put('/meals', async (req, res) => {
         }
       }
     );
-    res.send('Meal Successfully Updated');
-  } catch (err) {
+    res.send('Customer Successfully Updated.');
+  } 
+  catch (err) 
+  {
     console.error(err);
     res.error('Server error');
   }
 });
 
-/// /////////////////////////////////
-/// ////////Macros Endpoints/////////
-/// /////////////////////////////////
-router.get('/macros', async (req, res) => {
-  try {
-    const macros = await db.Macros.findAll();
-    res.send(macros);
-  } catch (err) {
-    console.error(err);
-    res.error('Server error');
-  }
-});
-
-router.get('/macros/:meal_id', async (req, res) => {
-  try {
-    const meals = await db.Macros.findAll({
-      where: {
-        meal_id: req.params.meal_id
-      }
-    });
-    res.json(meals);
-  } catch (err) {
-    console.error(err);
-    res.error('Server error');
-  }
-});
-
-router.put('/macros', async (req, res) => {
-  try {
-    // N.B. - this is a good example of where to use code validation to confirm objects
-    await db.Macros.update(
-      {
-        meal_name: req.body.meal_name,
-        meal_category: req.body.meal_category,
-        calories: req.body.calories,
-        serving_size: req.body.serving_size,
-        cholesterol: req.body.cholesterol,
-        sodium: req.body.sodium,
-        carbs: req.body.carbs,
-        protein: req.body.protein,
-        fat: req.body.fat
-      },
-      {
-        where: {
-          meal_id: req.body.meal_id
-        }
-      }
-    );
-    res.send('Successfully Updated');
-  } catch (err) {
-    console.error(err);
-    res.error('Server error');
-  }
-});
-
-/// /////////////////////////////////
-/// Dietary Restrictions Endpoints///
-/// /////////////////////////////////
-router.get('/restrictions', async (req, res) => {
-  try {
-    const restrictions = await db.DietaryRestrictions.findAll();
-    res.json(restrictions);
-  } catch (err) {
-    console.error(err);
-    res.error('Server error');
-  }
-});
-
-router.get('/restrictions/:restriction_id', async (req, res) => {
-  try {
-    const restrictions = await db.DietaryRestrictions.findAll({
-      where: {
-        restriction_id: req.params.restriction_id
-      }
-    });
-    res.json(restrictions);
-  } catch (err) {
-    console.error(err);
-    res.error('Server error');
-  }
-});
+// Kept this for a useful example - maybe?
 
 /// //////////////////////////////////
 /// ///////Custom SQL Endpoint////////
