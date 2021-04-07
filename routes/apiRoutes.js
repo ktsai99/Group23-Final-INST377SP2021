@@ -236,6 +236,24 @@ router.post('/customers', async (req, res) =>
 });
 
 // Delete a customer from database
+router.delete('/customers/:customer_id', async (req, res) => 
+{
+  try 
+  {
+    await db.Customers.destroy({
+      where: 
+      {
+        customer_id: req.params.customer_id
+      }
+    });
+    res.send('Customer Successfully Deleted');
+  } 
+  catch (err) 
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
 
 // Update a customer's record
 router.put('/customers', async (req, res) => 
@@ -244,16 +262,23 @@ router.put('/customers', async (req, res) =>
   {
     await db.Customers.update(
       {
-        customer_name: req.body.customer_name,
-        customer_address: req.body.customer_address
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        customer_address: req.body.customer_address,
+        customer_city: req.body.customer_city,
+        customer_state: req.body.customer_state,
+        customer_zip: req.body.customer_zip,
+        customer_age: req.body.customer_age,
+        credit_card_num: req.body.credit_card_num,
+        customer_email: req.body.customer_email,
       },
       {
         where: {
-          movie_id: req.body.movie_id
+          customer_id: req.body.customer_id
         }
       }
     );
-    res.send('Movie Successfully Updated.');
+    res.send('Customer Successfully Updated.');
   } 
   catch (err) 
   {
