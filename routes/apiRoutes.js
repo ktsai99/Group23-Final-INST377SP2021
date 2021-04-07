@@ -83,12 +83,21 @@ router.post('/movies', async (req, res) =>
   const currentId = (await movies.length) + 1;
   try 
   {
-    // I don't know all the params to put here since no one botherd to respond and give me a diagram of the database tables.
+    // What is the point of category id
+    // Code validation maybe?
     const newMovie = await db.Movies.create({
       movie_id: currentId,
+      category_id: req.body.category_id,
       movie_title: req.body.movie_title,
-      imdb_rating: req.body.imdb_rating,
-      duration: req.body.duration
+      pricing: req.body.pricing,
+      year: req.body.year,
+      duration: req.body.duration,
+      episodes: req.body.episodes,
+      seasons: req.body.seasons,
+      avg_star_rating: req.body.avg_star_rating,
+      media_type: req.body.media_type,
+      rating_id: req.body.rating_id,
+      studio_id: req.body.studio_id
     });
     res.json(newMovie);
   } 
@@ -106,7 +115,8 @@ router.delete('/movies/:movie_id', async (req, res) =>
   try 
   {
     await db.Movies.destroy({
-      where: {
+      where: 
+      {
         movie_id: req.params.movie_id
       }
     });
@@ -126,18 +136,28 @@ router.put('/movies', async (req, res) =>
   {
     await db.Movies.update(
       {
+        category_id: req.body.category_id,
         movie_title: req.body.movie_title,
-        imdb_rating: req.body.imdb_rating,
-        duration: req.body.duration
+        pricing: req.body.pricing,
+        year: req.body.year,
+        duration: req.body.duration,
+        episodes: req.body.episodes,
+        seasons: req.body.seasons,
+        avg_star_rating: req.body.avg_star_rating,
+        media_type: req.body.media_type,
+        rating_id: req.body.rating_id,
+        studio_id: req.body.studio_id
       },
       {
-        where: {
+        where: 
+        {
           movie_id: req.body.movie_id
         }
       }
     );
     res.send('Successfully Updated');
   } 
+  
   catch (err) 
   {
     console.error(err);
@@ -170,11 +190,12 @@ router.get('/customers/:customer_id', async (req, res) =>
   try 
   {
     const customers = await db.Customers.findAll({
-      where: {
+      where: 
+      {
         customer_id: req.params.customer_id
       }
     });
-    res.json(meals);
+    res.json(customers);
   } 
   
   catch (err) 
@@ -185,6 +206,34 @@ router.get('/customers/:customer_id', async (req, res) =>
 });
 
 // Add a customer to database
+router.post('/customers', async (req, res) => 
+{
+  const customers = await db.Customer.findAll();
+  const currentId = (await customers.length) + 1;
+  try 
+  {
+    // Code validation maybe?
+    const newCustomer = await db.Customers.create({
+      customer_id: currentId,
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      customer_address: req.body.customer_address,
+      customer_city: req.body.customer_city,
+      customer_state: req.body.customer_state,
+      customer_zip: req.body.customer_zip,
+      customer_age: req.body.customer_age,
+      credit_card_num: req.body.credit_card_num,
+      customer_email: req.body.customer_email,
+    });
+    res.json(newCustomer);
+  } 
+  
+  catch (err) 
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
 
 // Delete a customer from database
 
@@ -200,11 +249,11 @@ router.put('/customers', async (req, res) =>
       },
       {
         where: {
-          meal_id: req.body.meal_id
+          movie_id: req.body.movie_id
         }
       }
     );
-    res.send('Customer Successfully Updated.');
+    res.send('Movie Successfully Updated.');
   } 
   catch (err) 
   {
