@@ -287,6 +287,9 @@ router.put('/customers', async (req, res) =>
   }
 });
 
+// Gets for studio, rating, genre(?)
+
+
 // Kept this for a useful example - maybe?
 
 /// //////////////////////////////////
