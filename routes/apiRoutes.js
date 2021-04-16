@@ -21,13 +21,14 @@ router.get('/movies', async (req, res) =>
   try 
   {
     const movies = await db.Movies.findAll();
+    console.log(movies)
     const reply = movies.length > 0 ? { data: movies } : { message: 'no results found' };
     res.json(reply);
   } 
   catch (err) 
   {
     console.error(err);
-    res.error('Server error');
+    res.send(err);
   }
 });
 
@@ -48,7 +49,7 @@ router.get('/movies/:movie_id', async (req, res) =>
   catch (err) 
   {
     console.error(err);
-    res.error('Server error');
+    res.send(err);
   }
 });
 
@@ -528,6 +529,22 @@ router.get('/studios/:studio_id', async (req, res) =>
 });
 
 // Kept this for a useful example - maybe?
+
+const testCustom = 'SELECT * FROM `tv_movie`';
+router.get('/test', async (req, res) => 
+{
+  try 
+  {
+    const result = await db.sequelizeDB.query(testCustom, {
+      type: sequelize.QueryTypes.SELECT
+    });
+    res.json(result);
+  } 
+  catch (err) {
+    console.error(err);
+    res.error('Server error');
+  }
+});
 
 /// //////////////////////////////////
 /// ///////Custom SQL Endpoint////////

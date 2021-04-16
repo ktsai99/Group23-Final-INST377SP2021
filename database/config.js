@@ -1,4 +1,5 @@
-export default {
+export default 
+{
   development: {
     username: 'student',
     password: 'INST377@UMD',
