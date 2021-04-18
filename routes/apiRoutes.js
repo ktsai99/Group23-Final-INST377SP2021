@@ -528,6 +528,69 @@ router.get('/studios/:studio_id', async (req, res) =>
   }
 });
 
+//
+// Rental Information  Endpoints
+//
+
+//get all rental records
+router.get('/rental', async (req, res) => 
+{
+  try 
+  {
+    const rental = await db.Rental.findAll();
+    console.log(rental)
+    const reply = rental.confirmation_num != 0 ? { date: rental} : { message: 'no results found' };
+    res.json(reply);
+  } 
+  catch (err) 
+  {
+    console.error(err);
+    res.send(err);
+  }
+});
+
+// Get a specific record by confirmation_num
+router.get('/rental/confirmation_num/:confirmation_num', async (req, res) => 
+{
+  try 
+  {
+    const rental = await db.Rental.findAll({
+      where: 
+      {
+        confirmation_num: req.params.confirmation_num
+      }
+    });
+
+    res.json(rental);
+  } 
+  catch (err) 
+  {
+    console.error(err);
+    res.send(err);
+  }
+});
+
+// Get a specific record by invoice_id
+router.get('/rental/invoice_id/:invoice_id', async (req, res) => 
+{
+  try 
+  {
+    const rental = await db.Rental.findAll({
+      where: 
+      {
+        invoice_id: req.params.invoice_id
+      }
+    });
+
+    res.json(rental);
+  } 
+  catch (err) 
+  {
+    console.error(err);
+    res.send(err);
+  }
+});
+
 // Kept this for a useful example - maybe?
 
 const testCustom = 'SELECT * FROM `tv_movie`';
@@ -545,6 +608,8 @@ router.get('/test', async (req, res) =>
     res.error('Server error');
   }
 });
+
+
 
 /// //////////////////////////////////
 /// ///////Custom SQL Endpoint////////
