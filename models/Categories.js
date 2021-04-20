@@ -1,7 +1,7 @@
 export default (database, DataTypes) =>
 {
     const Categories = database.define(
-        'Categories_',
+        'categories',
         {
             category_id:
             {
@@ -10,7 +10,7 @@ export default (database, DataTypes) =>
             },
             genre_id:
             {
-                type: DataTypes.INTEGER,
+                type: DataTypes.INTEGER.UNSIGNED,
                 allowNull: false
             }
         },

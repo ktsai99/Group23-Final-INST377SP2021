@@ -5,7 +5,7 @@ export default (database, DataTypes) =>
       {
         confirmation_num: 
         {
-          type: DataTypes.INTEGER,
+          type: DataTypes.BIGINT.UNSIGNED,
           allowNull: false,
           primaryKey: true
         },

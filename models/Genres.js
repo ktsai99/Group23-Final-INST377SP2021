@@ -1,16 +1,18 @@
 export default (database, DataTypes) =>
 {
     const Genres = database.define(
-        'Genres',
+        'genre',
         {
             genre_id:
             {
-                type: DataTypes.INTEGER,
-                allowNull: false
+                type: DataTypes.INTEGER.UNSIGNED,
+                allowNull: false,
+                primaryKey: true,
+                autoIncrement: true
             },
             genre_name:
             {
-                type: DataTypes.STRING(30),
+                type: DataTypes.STRING(45),
                 allowNull: false
             }
         },
