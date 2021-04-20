@@ -18,12 +18,13 @@ async function windowActions()
         list.style.marginLeft = position + 'px';
         };
         
-    document.querySelector('.next').onclick = function() {
-        // shift right
+    document.querySelector('.next').onclick = function() 
+    {
         position -= width * count;
         position = Math.max(position, -width * (listElems.length - count));
-        list.style.marginLeft = position + 'px';
-        };
+        // transform
+        list.style = "Transform: translateX(" + position + "px)";
+    };
 
 
     async function getFullRatingsList(){
