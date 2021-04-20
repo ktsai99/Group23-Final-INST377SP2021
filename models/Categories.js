@@ -1,20 +1,20 @@
 export default (database, DataTypes) =>
 {
-    const Genres = database.define(
-        'Genres',
+    const Categories = database.define(
+        'Categories_',
         {
-            genre_id:
+            category_id:
             {
                 type: DataTypes.INTEGER,
                 allowNull: false
             },
-            genre_name:
+            genre_id:
             {
-                type: DataTypes.STRING(30),
+                type: DataTypes.INTEGER,
                 allowNull: false
             }
         },
         { freezeTableName: true, timestamps: false }
     );
-    return Genres;
+    return Categories;
 };
