@@ -8,7 +8,30 @@
     <link rel="stylesheet" href="./style.css"/>
   </head>
   <body>
-      <h1>Group 23</h1>
+      <h1>
+        <div class="tabs is-boxed is-large">
+          <ul>
+            <li class="is-active"><a>Home</a></li>
+            <li><a href="./pages/tv.html">TV</a></li>
+            <li><a href="./pages/movies.html">Movies</a></li>
+            <li><a href="./pages/genre.html">Genre</a></li>
+          </ul>
+        </div>
+        <form id="search-form" class="block">
+          <input id="search" type="text" class="input" name="input" placeholder="Search by Title"/>
+        </form>
+      </h1>
+      <div id="carousel" class="carousel">
+        <button class = "arrow prev">&#8656;</button>
+        <div class = "gallery">
+          <ul id = "rating">
+
+
+          </ul>
+        </div>
+        <button class = "arrow next">&#8658;</button>
+      </div>  
+      <script src="./script.js"></script>
   </body>
-  <script src="./script.js"></script>
+  
 </html>
