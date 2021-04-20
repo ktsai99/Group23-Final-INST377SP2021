@@ -64,11 +64,85 @@ async function windowActions()
         list.innerHTML = html;
         
         }
+    async function getFullRatingsList(){
+        const endpoint = "/api/movies";
+        const request = await fetch(endpoint);
+        const full = await request.json();
+        const fullData = full.data;
+        console.log(fullData);
+        fullArray = [];
+        fullData.forEach((row) => {
+            fullArray.push({
+                title: row.title,
+                rating: row.avg_star_rating
 
+            });
+        });
+        const list = document.querySelector("#rating");
+        let html ="";
+        fullArray.sort(function(a,b){
+            return b.rating - a.rating;
+        })
+        console.log(fullArray);
+      
+        fullArray.slice(0,20).forEach((a,b) => {
+            console.log(length)
+            console.log(fullArray[b].title)
+            html +=`
+            <li id = "title">${fullArray[b].title}
+            <ul>
+            <li id = "star-rating" >${fullArray[b].rating}</li>
+            </ul>
+            </li>
+
+            `
+            
+        });
+        list.innerHTML = html;
+        
+        }
+    async function getFullReleaseList(){
+        const endpoint = "/api/movies";
+        const request = await fetch(endpoint);
+        const full = await request.json();
+        const fullData = full.data;
+        console.log(fullData);
+        fullArray = [];
+        fullData.forEach((row) => {
+            fullArray.push({
+                title: row.title,
+                rating: row.avg_star_rating,
+                year: row.year
+
+            });
+        });
+        const list = document.querySelector("#year");
+        let html ="";
+        fullArray.sort(function(a,b){
+            return b.year - a.year;
+        })
+        console.log(fullArray);
+        
+        fullArray.slice(0,20).forEach((a,b) => {
+            console.log(length)
+            console.log(fullArray[b].title)
+            html +=`
+            <li id = "title">${fullArray[b].title}
+            <ul>
+            <li id = "star-rating" >${fullArray[b].rating}</li>
+            </ul>
+            </li>
+
+            `
+            
+        });
+        list.innerHTML = html;
+        
+        }
     
 
 getFullRatingsList();
-
+getFullReleaseList();
 
 }
 window.onload = windowActions;

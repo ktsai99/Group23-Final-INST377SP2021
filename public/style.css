@@ -1,10 +1,15 @@
 body{
 position: absolute;
 width: 1440px;
-height: 833px;
+height: 1440px;
 }
 .tabs{
     background-color: rgb(160, 201, 248);
+}
+h2{
+    position: bottom;
+    font-size: xx-large;
+
 }
 
 .block{
@@ -18,6 +23,7 @@ height: 833px;
 {
   position: relative;
   width: 1440px;
+  height: 330px;
   padding: 10px 40px;
   border: 1px solid #CCC;
   border-radius: 15px;
@@ -25,9 +31,10 @@ height: 833px;
   margin: auto;
   margin-top: 15%;
 }
+
 .arrow {
     position: absolute;
-    top: 60px;
+    top: 150px;
     padding: 0;
     background: rgb(109, 109, 109);
     border-radius: 15px;
