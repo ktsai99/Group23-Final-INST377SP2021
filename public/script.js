@@ -140,9 +140,11 @@ async function windowActions()
         
         }
     
-
+        async function getMovieDetails(){
+            
+        }
 getFullRatingsList();
 getFullReleaseList();
-
+        
 }
 window.onload = windowActions;

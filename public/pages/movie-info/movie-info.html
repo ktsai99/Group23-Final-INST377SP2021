@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./style-movie-info.css"/>
   </head>
   <body>
-    <h1>
+    <div class = "container">
         <div class="tabs is-boxed is-large">
           <ul>
             <li><a href= "../../index.html">Home</a></li>
@@ -16,11 +16,11 @@
             <li><a href="../movies.html">Movies</a></li>
             <li><a href="../genre.html">Genre</a></li>
           </ul>
+          <form id="search-form" class="block">
+            <input id="search" type="text" class="input" name="input" placeholder="Search by Title"/>
+          </form>
         </div>
-        <form id="search-form" class="block">
-          <input id="search" type="text" class="input" name="input" placeholder="Search by Title"/>
-        </form>
-    </h1>
+    </div>
     <div class="columns">
     <div class="column is-one-third">
       <section class="section">
@@ -45,29 +45,27 @@
             <tbody>
                 <tr>
                     <td>Viewer Rating</td>
-                    <td>PG</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>Rating</td>
-                    <td>7.4</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>Trailer</td>
-                    <td>link?</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>Cast</td>
-                    <td>Actor 1, Actor 2, Actor 3</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>Genre</td>
-                    <td>Comedy</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>Description</td>
-                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec feugiat tellus eu mi dignissim pellentesque. Duis sem quam, luctus vitae velit sed, consectetur laoreet mi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget sodales tortor. Proin ultricies sem id risus mollis molestie. Sed porta augue suscipit ligula volutpat, sit amet fermentum tortor pellentesque. Pellentesque metus erat, aliquet ut fermentum et, faucibus non est. Integer tempor eros et quam ullamcorper dignissim. Aliquam erat volutpat.
-                    </td>
-                </td>
+                    <td></td>
                 </tr>
             </tbody>
       </table>
@@ -83,5 +81,5 @@
     </div>
     </div>
   </body>
-  <script src="./script-movie-info.js"></script>
+  <script src="../../script.js"></script>
 </html>

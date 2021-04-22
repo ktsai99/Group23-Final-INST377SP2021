@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./style.css"/>
   </head>
   <body>
-      <h1>
+      <div class= "container">
         <div class="tabs is-boxed is-large">
           <ul>
             <li class="is-active"><a>Home</a></li>
@@ -16,11 +16,12 @@
             <li><a href="./pages/movies.html">Movies</a></li>
             <li><a href="./pages/genre.html">Genre</a></li>
           </ul>
+          <form id="search-form" class="block">
+            <input id="search" type="text" class="input" name="input" placeholder="Search by Title"/>
+          </form>
         </div>
-        <form id="search-form" class="block">
-          <input id="search" type="text" class="input" name="input" placeholder="Search by Title"/>
-        </form>
-      </h1>
+        
+      </div>
       <h2>Top Rated</h2>
       <div id="carousel" class="carousel">
         <button class = "arrow prev">&#8656;</button>
