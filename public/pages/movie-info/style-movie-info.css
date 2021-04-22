@@ -1,0 +1,63 @@
+h1 {
+    font-weight: bold;
+}
+
+.header {
+    font-size:larger;
+}
+
+.header img {
+    height: 445px;
+    width: 100%;
+}
+
+nav {
+    flex: 100%;
+    display: flex;
+    align-items: center;
+    background-color: rgb(160, 201, 248);
+    height: 50px;
+    font-size: larger;
+}
+
+nav ul {
+    padding: 0;
+    list-style-type: none;
+    flex: 2;
+    display: flex;
+}
+  
+nav li {
+    display: inline;
+    text-align: center;
+    flex: 1;
+}
+
+.box {
+    position: relative;
+    float: left;
+    margin-left: 10px;
+}
+
+h2 {
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.view-options {
+    /* border: 2px solid;
+    border-color: rgb(160, 201, 248); */
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    margin-left: 60px;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.button {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
