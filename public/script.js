@@ -89,7 +89,7 @@ async function windowActions()
             console.log(length)
             console.log(fullArray[b].title)
             html +=`
-            <li id = "title">${fullArray[b].title}
+            <li id = "title"><a href = "./pages/movie-info/movie-info.html">${fullArray[b].title}
             <ul>
             <li id = "star-rating" >${fullArray[b].rating}</li>
             </ul>
@@ -127,7 +127,7 @@ async function windowActions()
             console.log(length)
             console.log(fullArray[b].title)
             html +=`
-            <li id = "title">${fullArray[b].title}
+            <li id = "title"><a href = "./pages/movie-info/movie-info.html">${fullArray[b].title}
             <ul>
             <li id = "star-rating" >${fullArray[b].rating}</li>
             </ul>

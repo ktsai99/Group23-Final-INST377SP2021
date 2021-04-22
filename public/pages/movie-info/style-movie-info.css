@@ -5,7 +5,16 @@ h1 {
 .header {
     font-size:larger;
 }
-
+.tabs{
+    background-color: rgb(160, 201, 248);
+}
+.block{
+    position: absolute;
+    width: 271px;
+    height: 45px;
+    left: 1162px;
+    top: 13px;
+}
 .header img {
     height: 445px;
     width: 100%;
