@@ -6,6 +6,7 @@ height: 1440px;
 .tabs{
     background-color: rgb(160, 201, 248);
 }
+
 h2{
     position: relative;
     font-size: xx-large;
@@ -20,22 +21,27 @@ h2{
     height: 45px;
     top:13px;
 }
+
 .carousel 
 {
   position: relative;
   width: 1440px;
-  height: 330px;
   padding: 10px 40px;
   border: 1px solid #CCC;
   border-radius: 15px;
   background: #eee;
-  margin: auto;
-  margin-top: 15%;
+}
+
+.carousel li {
+  padding-top: 20px;
+  width: 132px;
+  height: 130px;
+  text-align: center;
 }
 
 .arrow {
     position: absolute;
-    top: 150px;
+    top: 60px;
     padding: 0;
     background: rgb(109, 109, 109);
     border-radius: 15px;
@@ -63,23 +69,20 @@ h2{
   }
   
 .gallery{
-    width: 1440px;
+    width: 1360px;
     overflow: hidden;
 }
-.gallery ul#title{
-    height: 130px;
-    width: 9999px;
-    margin: 0;
-    padding: 0;
-    transition: margin-left 250ms;
-    list-style: none;
-    font-size: 15;
+.gallery ul#rating{
+  height: 120px;
+  width: 28800px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transition: margin-left 250ms;
+  font-size: 1;
   }
 
 li#title {
-    
-    width: 130px;
-    height: 130px;
     display: inline-block;
   }
 
