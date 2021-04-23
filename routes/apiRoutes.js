@@ -16,40 +16,45 @@ router.get('/', (req, res) =>
 //
 
 // Get all movies
+
+const moviesCustom = `SELECT tm.*, \`description\`
+FROM \`tv_movie\` tm JOIN \`descriptions\` USING (catalogue_id)`;
 router.get('/movies', async (req, res) => 
 {
   try 
   {
-    const movies = await db.Movies.findAll();
-    console.log(movies)
-    const reply = movies.length > 0 ? { data: movies } : { message: 'no results found' };
-    res.json(reply);
+    const result = await db.sequelizeDB.query(moviesCustom, 
+      {
+        type: sequelize.QueryTypes.SELECT
+      });
+    res.json(result);
   } 
   catch (err) 
   {
     console.error(err);
-    res.send(err);
+    res.error('Server error');
   }
 });
 
 // Get a specifc movie by id
 router.get('/movies/:movie_id', async (req, res) => 
 {
-  try 
-  {
-    const movie = await db.Movies.findAll({
-      where: 
-      {
-        catalogue_id: req.params.movie_id
-      }
-    });
+const moviesCustomId = `SELECT tm.*, \`description\`
+FROM \`tv_movie\` tm JOIN \`descriptions\` USING (catalogue_id)
+WHERE catalogue_id = ${req.params.movie_id};`;
 
-    res.json(movie);
+try 
+  {
+    const result = await db.sequelizeDB.query(moviesCustomId, 
+      {
+        type: sequelize.QueryTypes.SELECT
+      });
+    res.json(result);
   } 
   catch (err) 
   {
     console.error(err);
-    res.send(err);
+    res.error('Server error');
   }
 });
 
