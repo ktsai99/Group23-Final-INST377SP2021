@@ -54,7 +54,7 @@ router.get('/movies/:movie_id', async (req, res) =>
 });
 
 // Get a range of movies by id
-router.get('/movies/:range_start/:range_end', async (req, res) => 
+router.get('/movies/range/:range_start/:range_end', async (req, res) => 
 {
   try 
   {
@@ -165,6 +165,31 @@ router.put('/movies', async (req, res) =>
   {
     console.error(err);
     res.error('Server error');
+  }
+});
+
+//
+// Descriptions Endpoints
+//
+
+// Get a specific movie description by catalogue id
+router.get('/movies/description/:catalouge_id', async (req, res) => 
+{
+  try 
+  {
+    const description = await db.Descriptions.findAll({
+      where: 
+      {
+        catalogue_id: req.params.catalouge_id
+      }
+    });
+    res.json(description);
+  } 
+  
+  catch (err) 
+  {
+    console.error(err);
+    res.send(err);
   }
 });
 
