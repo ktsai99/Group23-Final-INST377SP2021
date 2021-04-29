@@ -3,27 +3,47 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TV</title>
+    <title>Hello Bulma!</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
     <link rel="stylesheet" href="../style.css"/>
   </head>
   <body>
-      <h1>
+      <div class= "container">
         <div class="tabs is-boxed is-large">
           <ul>
             <li><a href="../index.html">Home</a></li>
-            <li class="is-active"><a href="./tv.html">TV</a></li>
+            <li class="is-active"><a>TV</a></li>
             <li><a href="./movies.html">Movies</a></li>
             <li><a href="./genre.html">Genre</a></li>
           </ul>
+          <form id="search-form" class="block">
+            <input id="search" type="text" class="input" name="input" placeholder="Search by Title"/>
+          </form>
         </div>
-        <form id="search-form" class="block">
-          <input id="search" type="text" class="input" name="input" placeholder="Search by Title"/>
-        </form>
-      </h1>
-      
-  
+        
+      </div>
+      <h2>Top Rated</h2>
+      <div id="carousel" class="carousel">
+        <button class = "arrow prev">&#8656;</button>
+        <div class = "gallery">
+          <ul class="first" id = "TVrating">
 
+          </ul>
+        </div>
+        <button class = "arrow next">&#8658;</button>
+      </div>
+      <h2>New Release</h2>
+      <div id="carousel" class="carousel">
+        <button class = "arrow prev2">&#8656;</button>
+        <div class = "gallery">
+          <ul class ="second" id = "TVyear">
+
+
+          </ul>
+        </div>
+        <button class = "arrow next2">&#8658;</button>
+      </div>
+      <script src="../script.js"></script>
   </body>
-  <script src="./script.js"></script>
+  
 </html>

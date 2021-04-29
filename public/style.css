@@ -67,12 +67,19 @@ h2{
 .next {
     right: 7px;
   }
+.prev2 {
+    left: 7px;
+  }
+  
+.next2 {
+    right: 7px;
+  }
   
 .gallery{
     width: 1360px;
     overflow: hidden;
 }
-.gallery ul#rating{
+.first{
   height: 120px;
   width: 28800px;
   margin: 0;
@@ -85,4 +92,12 @@ h2{
 li#title {
     display: inline-block;
   }
-
+.second{
+    height: 120px;
+    width: 28800px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    transition: margin-left 250ms;
+    font-size: 1;
+    }
