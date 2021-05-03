@@ -12,6 +12,12 @@ router.get('/', (req, res) =>
 });
 
 //
+// Transaction Endpoint
+//
+
+
+
+//
 // Movies Endpoints
 //
 
@@ -322,7 +328,9 @@ router.put('/customers', async (req, res) =>
 
 // Endpoints to pass all other database records to front end
 
-// Ratings
+//
+// Ratings Endpoints
+//
 
 // Get all ratings
 router.get('/ratings', async (req, res) => 
@@ -361,7 +369,9 @@ router.get('/ratings/:rating_id', async (req, res) =>
   }
 });
 
-// Categories
+//
+// Categories Endpoints
+//
 
 // Get all categories
 router.get('/categories', async (req, res) => 
@@ -400,7 +410,9 @@ router.get('/categories/:category_id', async (req, res) =>
   }
 });
 
-// Genre
+//
+// Genre Endpoints
+//
 
 // Get all genres
 router.get('/genres', async (req, res) => 
@@ -439,7 +451,9 @@ router.get('/genre/:genre_id', async (req, res) =>
   }
 });
 
-// Invoices
+//
+// Invoices Endpoints
+//
 
 // Get all invoices
 router.get('/invoices', async (req, res) => 
@@ -478,7 +492,13 @@ router.get('/invoices/:invoice_id', async (req, res) =>
   }
 });
 
+// Add a new invoice
+
+// Update an invoice
+
+//
 // Rental info
+//
 
 // Don't know if we should really be exposing things like this, but the assignment said to make all records available.
 
@@ -519,6 +539,80 @@ router.get('/rentals/:confirmation_number', async (req, res) =>
   }
 });
 
+// Get a specific record by invoice_id
+router.get('/rentals/invoice_id/:invoice_id', async (req, res) => 
+{
+  try 
+  {
+    const rental = await db.Rental.findAll({
+      where: 
+      {
+        invoice_id: req.params.invoice_id
+      }
+    });
+
+    res.json(rental);
+  } 
+  catch (err) 
+  {
+    console.error(err);
+    res.send(err);
+  }
+});
+
+// Add a new rental record
+router.post('/rentals', async (req, res) => 
+{
+  const rentals = await db.Rental.findAll();
+  const currentId = (await rentals.length) + 1;
+  try 
+  {
+    const newRental = await db.Rental.create({
+      confirmation_num: currentId,
+      invoice_id: req.body.invoice_id,
+      catalouge_id: req.body.catalogue_id,
+      purchase_type: req.body.purchase_type,
+      purchase_date: req.body.purchase_date
+    });
+    res.json(newRental);
+  }
+  catch(err) 
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+
+// Update a rental record
+router.put('/rentals', async (req, res) => 
+{
+  try 
+  {
+    await db.Rental.update(
+      {
+      invoice_id: req.body.invoice_id,
+      catalouge_id: req.body.catalogue_id,
+      purchase_type: req.body.purchase_type,
+      purchase_date: req.body.purchase_dat
+      },
+      {
+        where: {
+          confirmation_num: req.body.confirmation_num
+        }
+      }
+    );
+    res.send('Rental info Successfully Updated.');
+  } 
+  catch (err) 
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+
+
 // Studio
 
 // Get all studios
@@ -558,54 +652,7 @@ router.get('/studios/:studio_id', async (req, res) =>
   }
 });
 
-//
-// Rental Information  Endpoints
-//
-
-// Get a specific record by confirmation_num
-router.get('/rentals/confirmation_num/:confirmation_num', async (req, res) => 
-{
-  try 
-  {
-    const rental = await db.Rental.findAll({
-      where: 
-      {
-        confirmation_num: req.params.confirmation_num
-      }
-    });
-
-    res.json(rental);
-  } 
-  catch (err) 
-  {
-    console.error(err);
-    res.send(err);
-  }
-});
-
-// Get a specific record by invoice_id
-router.get('/rentals/invoice_id/:invoice_id', async (req, res) => 
-{
-  try 
-  {
-    const rental = await db.Rental.findAll({
-      where: 
-      {
-        invoice_id: req.params.invoice_id
-      }
-    });
-
-    res.json(rental);
-  } 
-  catch (err) 
-  {
-    console.error(err);
-    res.send(err);
-  }
-});
-
-// Kept this for a useful example - maybe?
-
+// Testing endpoint - make sure to remove before final submission
 const testCustom = 'SELECT * FROM `genre`';
 router.get('/test', async (req, res) => 
 {
@@ -621,57 +668,4 @@ router.get('/test', async (req, res) =>
     res.error('Server error');
   }
 });
-
-
-
-/// //////////////////////////////////
-/// ///////Custom SQL Endpoint////////
-/// /////////////////////////////////
-const macrosCustom = 'SELECT `Dining_Hall_Tracker`.`Meals`.`meal_id` AS `meal_id`,`Dining_Hall_Tracker`.`Meals`.`meal_name` AS `meal_name`,`Dining_Hall_Tracker`.`Macros`.`calories` AS `calories`,`Dining_Hall_Tracker`.`Macros`.`carbs` AS `carbs`,`Dining_Hall_Tracker`.`Macros`.`sodium` AS `sodium`,`Dining_Hall_Tracker`.`Macros`.`protein` AS `protein`,`Dining_Hall_Tracker`.`Macros`.`fat` AS `fat`,`Dining_Hall_Tracker`.`Macros`.`cholesterol` AS `cholesterol`FROM(`Dining_Hall_Tracker`.`Meals`JOIN `Dining_Hall_Tracker`.`Macros`)WHERE(`Dining_Hall_Tracker`.`Meals`.`meal_id` = `Dining_Hall_Tracker`.`Macros`.`meal_id`)';
-router.get('/table/data', async (req, res) => {
-  try {
-    const result = await db.sequelizeDB.query(macrosCustom, {
-      type: sequelize.QueryTypes.SELECT
-    });
-    res.json(result);
-  } catch (err) {
-    console.error(err);
-    res.error('Server error');
-  }
-});
-
-const mealMapCustom = `SELECT hall_name,
-  hall_address,
-  hall_lat,
-  hall_long,
-  meal_name
-FROM
-  Meals m
-INNER JOIN Meals_Locations ml 
-  ON m.meal_id = ml.meal_id
-INNER JOIN Dining_Hall d
-ON d.hall_id = ml.hall_id;`;
-router.get('/map/data', async (req, res) => {
-  try {
-    const result = await db.sequelizeDB.query(mealMapCustom, {
-      type: sequelize.QueryTypes.SELECT
-    });
-    res.json(result);
-  } catch (err) {
-    console.error(err);
-    res.error('Server error');
-  }
-});
-router.get('/custom', async (req, res) => {
-  try {
-    const result = await db.sequelizeDB.query(req.body.query, {
-      type: sequelize.QueryTypes.SELECT
-    });
-    res.json(result);
-  } catch (err) {
-    console.error(err);
-    res.error('Server error');
-  }
-});
-
 export default router;
