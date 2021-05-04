@@ -308,7 +308,7 @@ router.get('/categories', async (req, res) =>
 });
 
 // Get a specifc category by id
-router.get('/categories/:category_id', async (req, res) => 
+router.get('/categories/:cat_id', async (req, res) => 
 {
   try 
   {
