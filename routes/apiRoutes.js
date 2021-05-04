@@ -56,8 +56,11 @@ router.post('/transaction', async (req, res) =>
 
 // Get all movies
 
-const moviesCustom = `SELECT tm.*, \`description\`
-FROM \`tv_movie\` tm JOIN \`descriptions\` USING (catalogue_id)`;
+const moviesCustom = `SELECT tm.*, \`description\`, \`g\`.\`genre_name\`
+FROM \`tv_movie\` tm JOIN \`descriptions\` USING (catalogue_id)
+JOIN \`categories\` c ON tm.category_id = c.category_id
+JOIN \`genre\` g ON c.genre_id = g.genre_id;`
+
 router.get('/movies', async (req, res) => 
 {
   try 
@@ -78,8 +81,10 @@ router.get('/movies', async (req, res) =>
 // Get a specifc movie by id
 router.get('/movies/:movie_id', async (req, res) => 
 {
-const moviesCustomId = `SELECT tm.*, \`description\`
+const moviesCustomId = `SELECT tm.*, \`description\`, \`g\`.\`genre_name\`
 FROM \`tv_movie\` tm JOIN \`descriptions\` USING (catalogue_id)
+JOIN \`categories\` c ON tm.category_id = c.category_id
+JOIN \`genre\` g ON c.genre_id = g.genre_id
 WHERE catalogue_id = ${req.params.movie_id};`;
 
 try 
@@ -289,9 +294,11 @@ router.get('/categories', async (req, res) =>
 {
   try 
   {
-    const categories = await db.Categories.findAll();
-    const reply = categories.length > 0 ? { data: catagories } : { message: 'no results found' };
-    res.json(reply);
+    const result = await db.sequelizeDB.query("SELECT * FROM \`categories\`", 
+      {
+        type: sequelize.QueryTypes.SELECT
+      });
+    res.json(result);
   } 
   catch (err) 
   {
@@ -305,14 +312,11 @@ router.get('/categories/:category_id', async (req, res) =>
 {
   try 
   {
-    const category = await db.Categories.findAll({
-      where: 
+    const result = await db.sequelizeDB.query(`SELECT * FROM \`categories\` WHERE \`category_id\` = ${req.params.category_id};`, 
       {
-        catalogue_id: req.params.category_id
-      }
-    });
-
-    res.json(category);
+        type: sequelize.QueryTypes.SELECT
+      });
+    res.json(result);
   } 
   catch (err) 
   {
