@@ -16,7 +16,21 @@ async function windowActions()
         });
         list.innerHTML = html;
     }
-  
+    async function genresFill(genre_id){
+        const endpoint = "/api/movies";
+        const request = await fetch(endpoint);
+        const full = await request.json();
+        const fullArray = [];
+        
+        full.forEach((row) => {
+            if (row)
+            fullArray.push({
+                title: row.title,
+                rating: row.avg_star_rating
+
+            });
+        });
+    }
 
     
     async function getFullRatingsList(){
@@ -61,6 +75,7 @@ async function windowActions()
         const full = await request.json();
         const fullArray = [];
         full.forEach((row) => {
+            
             fullArray.push({
                 title: row.title,
                 rating: row.avg_star_rating,
