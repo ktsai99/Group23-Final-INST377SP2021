@@ -105,10 +105,14 @@ try
 // Get a range of movies by id
 router.get('/movies/range/:range_start/:range_end', async (req, res) => 
 {
+const moviesCustomRange = `SELECT tm.*, \`description\`, \`g\`.\`genre_name\`
+FROM \`tv_movie\` tm JOIN \`descriptions\` USING (catalogue_id)
+JOIN \`categories\` c ON tm.category_id = c.category_id
+JOIN \`genre\` g ON c.genre_id = g.genre_id
+WHERE catalogue_id BETWEEN ${req.params.range_start} AND ${req.params.range_end};`;
   try 
   {
-    const result = await db.sequelizeDB.query(`SELECT * FROM \`tv_movie\` WHERE \`catalogue_id\` BETWEEN ${req.params.range_start}
-    AND ${req.params.range_end}`, 
+    const result = await db.sequelizeDB.query(moviesCustomRange, 
       {
         type: sequelize.QueryTypes.SELECT
       });
@@ -205,6 +209,36 @@ router.put('/movies', async (req, res) =>
     res.send('Successfully Updated');
   } 
   
+  catch (err) 
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+//
+// Counts Endpoints
+//
+
+// Update a count record
+router.put('/counts', async (req, res) => 
+{
+  try 
+  {
+    await db.Counts.update(
+      {
+        purchase_count: req.body.purchase_count,
+        rental_count: req.body.rental_count
+      },
+      {
+        where: 
+        {
+          catalogue_id: req.body.catalogue_id
+        }
+      }
+    );
+    res.send('Count Successfully Updated');
+  } 
   catch (err) 
   {
     console.error(err);
