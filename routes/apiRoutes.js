@@ -107,17 +107,12 @@ router.get('/movies/range/:range_start/:range_end', async (req, res) =>
 {
   try 
   {
-    const movie = await db.Movies.findAll({
-      where: {
-        [Op.between]: 
-        [
-          { catalogue_id: range_start },
-          { catalogue_id: range_end }
-        ]
-      }
-    });
-
-    res.json(movie);
+    const result = await db.sequelizeDB.query(`SELECT * FROM \`tv_movie\` WHERE \`catalogue_id\` BETWEEN ${req.params.range_start}
+    AND ${req.params.range_end}`, 
+      {
+        type: sequelize.QueryTypes.SELECT
+      });
+    res.json(result);
   } 
   catch (err) 
   {
@@ -426,7 +421,7 @@ router.post('/invoices', async (req, res) =>
   catch(err) 
   {
     console.error(err);
-    res.send(`Server error: ${err}`);
+    res.send("Server error");
   }
 });
 
