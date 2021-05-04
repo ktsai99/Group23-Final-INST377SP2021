@@ -1,15 +1,17 @@
+"use strict";
+
 async function windowActions()
 {
     async function genres(){
         const endpoint ="/api/genres"
         const request = await fetch(endpoint);
         const genre = await request.json()
-        console.log(genre.data)
+        //console.log(genre.data)
         const list = document.querySelector('#genre')
         
         let html ="";
         genre.data.forEach((row) => {
-            console.log(row)
+            //console.log(row)
             html+= `
             <li id ="${row.genre_id}"><a>${row.genre_name}</a></li>
             `
@@ -300,6 +302,44 @@ async function windowActions()
                 list2.style.marginLeft = position + 'px';
               };
 
+//Search bar query
+const endpoint = "/api/movies";
+
+const request = await fetch(endpoint);
+const movies = await request.json();
+
+function findMatches(wordToMatch, movies) {
+    return movies.filter(m => {
+        const regex = new RegExp(wordToMatch, "gi");
+        return m.title.match(regex);
+    });
+}
+function displayMatches(event) {
+
+const matchArray = findMatches(e.target.value, movies);
+        const html = matchArray.map(m => {
+            return `
+                <li>
+                    <ul>
+                        <li class="address"> ${m.title} — ${m.avg_star_rating} ${m.pricing}</li>
+                    </ul>
+                </li>
+            `;
+        }).join('');
+
+        suggestions.innerHTML = html;
+    }
+    console.log("hello there");
+    const elements = document.querySelector('.suggestions');
+    console.log(elements);
+const form = document.querySelector("link[rel=import][href='search.html']")
+.import.querySelector(".search-form");
+const suggestions = document.querySelector("link[rel=import][href='search.html']")
+.import.querySelector(".suggestions");
+
+searchInput.addEventListener("change", (evt) => { evt.preventDefault(); displayMatches(evt) });
+searchInput.addEventListener("keyup", (evt) => { evt.preventDefault(); displayMatches(evt) });
+
 genres();
 getTVReleaseList();
 getTVRatingsList();
@@ -307,5 +347,7 @@ getFullRatingsList();
 getFullReleaseList(); 
 getMOVRatingsList();
 getMOVReleaseList();    
+
+
 }
 window.onload = windowActions;
