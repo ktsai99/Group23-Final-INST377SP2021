@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import express from 'express';
-import sequelize, { Sequelize } from 'sequelize';
+import sequelize from 'sequelize';
 
 import db from '../database/initializeDB.js';
 
@@ -14,40 +14,7 @@ router.get('/', (req, res) =>
 //
 // Transaction Endpoint
 //
-router.post('/transaction', async (req, res) => 
-{
-  const invoices = await db.Invoices.findAll();
-  const rentals = await db.Rental.findAll();
-  const currentInvoiceId = (await invoices.length) + 1;
-  const currentRentalId = (await rentals.length) + 1;
-  const now = Sequelize.fn('NOW');
 
-  try 
-  {
-    const newInvoice = await db.Invoices.create({
-      invoice_id: currentInvoiceId,
-      customer_id: 1,
-      credit_total: req.body.credit_total,
-      invoice_date: now,
-      invoice_total: req.body.invoice_total
-    });
-    //res.json(newInvoice);
-
-    const newRental = await db.Rental.create({
-      confirmation_num: currentRentalId,
-      invoice_id: currentInvoiceId,
-      catalogue_id: req.body.catalogue_id,
-      purchase_type: req.body.purchase_type,
-      purchase_date: now
-    });
-    res.json(newRental);
-  }
-  catch(err) 
-  {
-    console.error(err);
-    res.send(`Server error: ${err}`);
-  }
-});
 
 
 //
@@ -237,6 +204,128 @@ router.get('/movies/description/:catalouge_id', async (req, res) =>
   }
 });
 
+//
+// Customers Endpoints
+//
+
+// Get all customers
+router.get('/customers', async (req, res) => 
+{
+  try 
+  {
+    const customers = await db.Customers.findAll();
+    res.json(customers);
+  } 
+  catch (err) 
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+// Get a specific customer by id
+router.get('/customers/:customer_id', async (req, res) => 
+{
+  try 
+  {
+    const customers = await db.Customers.findAll({
+      where: 
+      {
+        customer_id: req.params.customer_id
+      }
+    });
+    res.json(customers);
+  } 
+  
+  catch (err) 
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+// Add a customer to database
+router.post('/customers', async (req, res) => 
+{
+  const customers = await db.Customer.findAll();
+  const currentId = (await customers.length) + 1;
+  try 
+  {
+    // Code validation maybe?
+    const newCustomer = await db.Customers.create({
+      customer_id: currentId,
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      customer_address: req.body.customer_address,
+      customer_city: req.body.customer_city,
+      customer_state: req.body.customer_state,
+      customer_zip: req.body.customer_zip,
+      customer_age: req.body.customer_age,
+      credit_card_num: req.body.credit_card_num,
+      customer_email: req.body.customer_email,
+    });
+    res.json(newCustomer);
+  } 
+  
+  catch (err) 
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+// Delete a customer from database
+router.delete('/customers/:customer_id', async (req, res) => 
+{
+  try 
+  {
+    await db.Customers.destroy({
+      where: 
+      {
+        customer_id: req.params.customer_id
+      }
+    });
+    res.send('Customer Successfully Deleted');
+  } 
+  catch (err) 
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+// Update a customer's record
+router.put('/customers', async (req, res) => 
+{
+  try 
+  {
+    await db.Customers.update(
+      {
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        customer_address: req.body.customer_address,
+        customer_city: req.body.customer_city,
+        customer_state: req.body.customer_state,
+        customer_zip: req.body.customer_zip,
+        customer_age: req.body.customer_age,
+        credit_card_num: req.body.credit_card_num,
+        customer_email: req.body.customer_email,
+      },
+      {
+        where: {
+          customer_id: req.body.customer_id
+        }
+      }
+    );
+    res.send('Customer Successfully Updated.');
+  } 
+  catch (err) 
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
 // Endpoints to pass all other database records to front end
 
 //
@@ -404,55 +493,8 @@ router.get('/invoices/:invoice_id', async (req, res) =>
 });
 
 // Add a new invoice
-router.post('/invoices', async (req, res) => 
-{
-  const invoices = await db.Invoices.findAll();
-  const currentId = (await invoices.length) + 1;
-  try 
-  {
-    const newInvoice = await db.Invoices.create({
-      invoice_id: currentId,
-      customer_id: 1,
-      credit_total: req.body.credit_total,
-      invoice_date: Sequelize.fn('NOW'),
-      invoice_total: req.body.invoice_total
-    });
-    res.json(newInvoice);
-  }
-  catch(err) 
-  {
-    console.error(err);
-    res.send(`Server error: ${err}`);
-  }
-});
 
 // Update an invoice
-router.put('/invoices', async (req, res) => 
-{
-  try 
-  {
-    await db.Invoices.update(
-      {
-        customer_id: 1,
-        credit_total: req.body.credit_total,
-        invoice_date: req.body.invoice_date,
-        invoice_total: req.body.invoice_total
-      },
-      {
-        where: 
-        {
-          invoice_id: req.body.invoice_id
-        }
-      }
-    );
-    res.send('Invoice Successfully Updated.');
-  } 
-  catch (err) 
-  {
-    console.error(err);
-    res.error('Server error');
-  }
-});
 
 //
 // Rental info
@@ -497,7 +539,7 @@ router.get('/rentals/:confirmation_number', async (req, res) =>
   }
 });
 
-// Get a specific rental record by invoice_id
+// Get a specific record by invoice_id
 router.get('/rentals/invoice_id/:invoice_id', async (req, res) => 
 {
   try 
@@ -530,7 +572,7 @@ router.post('/rentals', async (req, res) =>
       invoice_id: req.body.invoice_id,
       catalouge_id: req.body.catalogue_id,
       purchase_type: req.body.purchase_type,
-      purchase_date: Sequelize.fn('NOW')
+      purchase_date: req.body.purchase_date
     });
     res.json(newRental);
   }
@@ -552,7 +594,7 @@ router.put('/rentals', async (req, res) =>
       invoice_id: req.body.invoice_id,
       catalouge_id: req.body.catalogue_id,
       purchase_type: req.body.purchase_type,
-      purchase_date: req.body.purchase_date
+      purchase_date: req.body.purchase_dat
       },
       {
         where: {
