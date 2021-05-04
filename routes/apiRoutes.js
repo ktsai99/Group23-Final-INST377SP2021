@@ -454,8 +454,49 @@ router.put('/invoices', async (req, res) =>
 });
 
 //
+// Poster/Trailer endpoints
+//
+
+//Get all poster images
+
+
+//
 // Rental info
 //
+router.get('/poster/image', async(req,res) =>
+{
+  try
+  {
+    const result = await db.sequelizeDB.query("SELECT * FROM \`poster\`",
+      {
+        type: sequelize.QueryTypes.SELECT
+      });
+    res.json(result);
+  }
+  catch (err)
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
+
+// Get a poster by id
+router.get('/poster/image/:poster_id', async (req, res) => 
+{
+  try 
+  {
+    const result = await db.sequelizeDB.query(`SELECT poster_link FROM \`poster\` WHERE \`poster_id\` = ${req.params.poster_id};`, 
+      {
+        type: sequelize.QueryTypes.SELECT
+      });
+    res.json(result);
+  } 
+  catch (err) 
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
 
 // Don't know if we should really be exposing things like this, but the assignment said to make all records available.
 
