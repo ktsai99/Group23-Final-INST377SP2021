@@ -94,6 +94,7 @@ h2{
 
 li#title {
     display: inline-block;
+    
   }
 .second{
     height: 120px;
@@ -104,7 +105,7 @@ li#title {
     transition: margin-left 250ms;
     font-size: 1;
     }
-.genre{
-  padding: auto;
-  margin: auto;
-}
+  ul#genre-content{
+    
+    text-align: center;
+  }
