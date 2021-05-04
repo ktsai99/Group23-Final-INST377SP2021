@@ -1,12 +1,30 @@
 async function windowActions()
 {
+    async function genres(){
+        const endpoint ="/api/genres"
+        const request = await fetch(endpoint);
+        const genre = await request.json()
+        console.log(genre.data)
+        const list = document.querySelector('#genre')
+        
+        let html ="";
+        genre.data.forEach((row) => {
+            console.log(row)
+            html+= `
+            <li id ="${row.genre_id}"><a>${row.genre_name}</a></li>
+            `
+        });
+        list.innerHTML = html;
+    }
+  
 
+    
     async function getFullRatingsList(){
         const endpoint = "/api/movies";
         const request = await fetch(endpoint);
         const full = await request.json();
         const fullData = full.data;
-        console.log(fullData);
+      
         const fullArray = [];
         full.forEach((row) => {
             fullArray.push({
@@ -20,11 +38,10 @@ async function windowActions()
         fullArray.sort(function(a,b){
             return b.rating - a.rating;
         })
-        //console.log(fullArray);
+       
       
         fullArray.slice(0,20).forEach((a,b) => {
-            //console.log(length)
-            //console.log(fullArray[b].title)
+         
             html +=`
             <li id = "title"><a href = "./pages/movie-info/movie-info.html">${fullArray[b].title}
             <ul>
@@ -56,11 +73,10 @@ async function windowActions()
         fullArray.sort(function(a,b){
             return b.year - a.year;
         })
-        //console.log(fullArray);
+       
         
         fullArray.slice(0,20).forEach((a,b) => {
-            //console.log(length)
-            //console.log(fullArray[b].title)
+           
             html +=`
             <li id = "title"><a href = "./pages/movie-info/movie-info.html">${fullArray[b].title}
             <ul>
@@ -80,7 +96,7 @@ async function windowActions()
         const request = await fetch(endpoint);
         const full = await request.json();
         const fullData = full.data;
-        console.log(fullData);
+      
         const fullArray = [];
         full.forEach((row) => {
             
@@ -92,17 +108,16 @@ async function windowActions()
                 });
             }
         });
-        console.log(fullArray)
+
         const list = document.querySelector("#MOVrating");
         let html ="";
         fullArray.sort(function(a,b){
             return b.rating - a.rating;
         })
-        //console.log(fullArray);
+      
         
         fullArray.slice(0,20).forEach((a,b) => {
-            //console.log(length)
-            //console.log(fullArray[b].title)
+          
             html +=`
             <li id = "title"><a href = "./pages/movie-info/movie-info.html">${fullArray[b].title}
             <ul>
@@ -136,11 +151,10 @@ async function windowActions()
         fullArray.sort(function(a,b){
             return b.year - a.year;
         })
-        //console.log(fullArray);
+    
         
         fullArray.slice(0,20).forEach((a,b) => {
-            //console.log(length)
-            //console.log(fullArray[b].title)
+         
             html +=`
             <li id = "title"><a href = "./pages/movie-info/movie-info.html">${fullArray[b].title}
             <ul>
@@ -159,7 +173,7 @@ async function windowActions()
         const request = await fetch(endpoint);
         const full = await request.json();
         const fullData = full.data;
-        console.log(fullData);
+       
         const fullArray = [];
         full.forEach((row) => {
             
@@ -171,17 +185,16 @@ async function windowActions()
                 });
             }
         });
-        console.log(fullArray)
+       
         const list = document.querySelector("#TVrating");
         let html ="";
         fullArray.sort(function(a,b){
             return b.rating - a.rating;
         })
-        //console.log(fullArray);
+      
         
         fullArray.forEach((a,b) => {
-            //console.log(length)
-            //console.log(fullArray[b].title)
+           
             html +=`
             <li id = "title"><a href = "./pages/movie-info/movie-info.html">${fullArray[b].title}
             <ul>
@@ -215,11 +228,10 @@ async function windowActions()
         fullArray.sort(function(a,b){
             return b.year - a.year;
         })
-        //console.log(fullArray);
+       
         
         fullArray.slice(0,20).forEach((a,b) => {
-            //console.log(length)
-            //console.log(fullArray[b].title)
+    
             html +=`
             <li id = "title"><a href = "./pages/movie-info/movie-info.html">${fullArray[b].title}
             <ul>
@@ -272,6 +284,8 @@ async function windowActions()
                 position = Math.max(position, -width * (9 + count));
                 list2.style.marginLeft = position + 'px';
               };
+
+genres();
 getTVReleaseList();
 getTVRatingsList();
 getFullRatingsList();
