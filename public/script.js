@@ -1,6 +1,6 @@
 async function windowActions()
 {
-    async function genres(){
+    async function genresTab(){
         const endpoint ="/api/genres"
         const request = await fetch(endpoint);
         const genre = await request.json()
@@ -11,7 +11,7 @@ async function windowActions()
         genre.data.forEach((row) => {
             console.log(row)
             html+= `
-            <li id ="${row.genre_id}"><a>${row.genre_name}</a></li>
+            <li id ='${row.genre_id}'><a>${row.genre_name}</a></li>
             `
         });
         list.innerHTML = html;
@@ -21,16 +21,42 @@ async function windowActions()
         const request = await fetch(endpoint);
         const full = await request.json();
         const fullArray = [];
+ 
+        const request2 = await fetch(`/api/genre/${genre_id}`)
+        const data = await request2.json();
+        console.log(request2)
+        const genre_name = data[0].genre_name
         
         full.forEach((row) => {
-            if (row)
+            
+            if (row.genre_name === genre_name)
             fullArray.push({
                 title: row.title,
                 rating: row.avg_star_rating
 
             });
         });
-    }
+        const list = document.querySelector("#genre-content");
+        let html ="";
+        console.log(fullArray)
+       
+      
+        fullArray.forEach((a,b) => {
+         
+            html +=`
+            <li id = "title"><a href = "./pages/movie-info/movie-info.html">${fullArray[b].title}
+            <ul>
+            <li id = "star-rating" >${fullArray[b].rating}</li>
+            </ul>
+            </li>
+            `
+            
+        });
+        console.log(html)
+        list.innerHTML = html;
+        
+        }
+    
 
     
     async function getFullRatingsList(){
@@ -300,12 +326,26 @@ async function windowActions()
                 list2.style.marginLeft = position + 'px';
               };
 
-genres();
+
+genresTab();
 getTVReleaseList();
 getTVRatingsList();
 getFullRatingsList();
 getFullReleaseList(); 
 getMOVRatingsList();
 getMOVReleaseList();    
+const parent_id = '';
+document.getElementById("genre").addEventListener("click", (event) =>{
+    if(parent_id != ''){
+        document.getElementById(`${parent_id}`).classList.remove("is-active");
+    };
+    const target = event.target;
+    const parent = target.parentElement;
+    
+    
+    document.getElementById(`${parent.id}`).classList.add("is-active");
+    genresFill(parent.id);
+    parent_id = parent.id;
+});
 }
 window.onload = windowActions;
