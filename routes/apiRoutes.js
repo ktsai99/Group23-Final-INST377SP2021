@@ -42,10 +42,11 @@ router.post('/transaction', async (req, res) =>
     });
     res.json(newRental);
   }
+  
   catch(err) 
   {
     console.error(err);
-    res.send(`Server error: ${err}`);
+    res.send("Server error");
   }
 });
 
@@ -55,7 +56,6 @@ router.post('/transaction', async (req, res) =>
 //
 
 // Get all movies
-
 const moviesCustom = `SELECT tm.*, \`description\`, \`g\`.\`genre_name\`
 FROM \`tv_movie\` tm JOIN \`descriptions\` USING (catalogue_id)
 JOIN \`categories\` c ON tm.category_id = c.category_id
