@@ -56,8 +56,10 @@ router.post('/transaction', async (req, res) =>
 //
 
 // Get all movies
-const moviesCustom = `SELECT tm.*, \`description\`, \`g\`.\`genre_name\`
+const moviesCustom = `SELECT tm.*, tl.trailer_link, \`description\`, \`g\`.\`genre_name\`, co.purchase_count, co.rental_count
 FROM \`tv_movie\` tm JOIN \`descriptions\` USING (catalogue_id)
+JOIN \`counts\` co USING (catalogue_id)
+JOIN \`trailer\` tl USING (catalogue_id)
 JOIN \`categories\` c ON tm.category_id = c.category_id
 JOIN \`genre\` g ON c.genre_id = g.genre_id;`
 
@@ -81,8 +83,10 @@ router.get('/movies', async (req, res) =>
 // Get a specifc movie by id
 router.get('/movies/:movie_id', async (req, res) => 
 {
-const moviesCustomId = `SELECT tm.*, \`description\`, \`g\`.\`genre_name\`
+const moviesCustomId = `SELECT tm.*, tl.trailer_link, \`description\`, \`g\`.\`genre_name\`, co.purchase_count, co.rental_count
 FROM \`tv_movie\` tm JOIN \`descriptions\` USING (catalogue_id)
+JOIN \`counts\` co USING (catalogue_id)
+JOIN \`trailer\` tl USING (catalogue_id)
 JOIN \`categories\` c ON tm.category_id = c.category_id
 JOIN \`genre\` g ON c.genre_id = g.genre_id
 WHERE catalogue_id = ${req.params.movie_id};`;
@@ -105,8 +109,10 @@ try
 // Get a range of movies by id
 router.get('/movies/range/:range_start/:range_end', async (req, res) => 
 {
-const moviesCustomRange = `SELECT tm.*, \`description\`, \`g\`.\`genre_name\`
+const moviesCustomRange = `SELECT tm.*, tl.trailer_link, \`description\`, \`g\`.\`genre_name\`, co.purchase_count, co.rental_count
 FROM \`tv_movie\` tm JOIN \`descriptions\` USING (catalogue_id)
+JOIN \`counts\` co USING (catalogue_id)
+JOIN \`trailer\` tl USING (catalogue_id)
 JOIN \`categories\` c ON tm.category_id = c.category_id
 JOIN \`genre\` g ON c.genre_id = g.genre_id
 WHERE catalogue_id BETWEEN ${req.params.range_start} AND ${req.params.range_end};`;
