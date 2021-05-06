@@ -1,10 +1,12 @@
 async function windowActions(){
+    const URLQuery = window.location.search;
+    const URLParam = new URLSearchParams(URLQuery);
+    const URL_ID = URLParam.get('id');
     async function populateMovieInfo(movie_id){
         
     }
-    document.getElementsByClassName("movie_id").addEventListener((event) =>{
-        const target = event.target;
-        const parent = target.parentElement;
 
-    });
+    console.log(URL_ID)
+
 }
+window.onload = windowActions;
