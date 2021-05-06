@@ -301,7 +301,7 @@ function findMatches(wordToMatch, movies) {
     });
 }
 function displayMatches(e) {
-    if (event.target.value === "") {
+    if (e.target.value === "") {
         suggestions.innerHTML = "";
         return;
     }
@@ -326,6 +326,7 @@ const matchArray = findMatches(e.target.value, movies);
 searchInput.addEventListener("change", (evt) => { evt.preventDefault(); displayMatches(evt) });
 searchInput.addEventListener("keyup", (evt) => { evt.preventDefault(); displayMatches(evt) });       
 
+//Carousel code
     let width = 136;
     let count = 1;
     
