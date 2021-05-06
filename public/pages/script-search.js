@@ -25,7 +25,7 @@ const matchArray = findMatches(e.target.value, movies);
             return `
                 <li>
                     <ul>
-                        <li class="address"> ${m.title} — ${m.avg_star_rating} ${m.pricing}</li>
+                        <li class="address"><a href = "./pages/movie-info/movie-info.html?&id=${m.catalogue_id}"> ${m.title} — ${m.avg_star_rating} ${m.pricing}</li>
                     </ul>
                 </li>
             `;
