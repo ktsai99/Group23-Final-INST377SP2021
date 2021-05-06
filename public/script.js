@@ -50,22 +50,24 @@ async function windowActions()
             TVArray.push({
                 title: row.title,
                 rating: row.avg_star_rating,
-                movie_id: row.catalogue_id
+                movie_id: row.catalogue_id,
+                poster: row.poster_link
             });
             };
             if (row.genre_name === genre_name){
             fullArray.push({
                 title: row.title,
                 rating: row.avg_star_rating,
-                movie_id: row.catalogue_id
-
+                movie_id: row.catalogue_id,
+                poster: row.poster_link
             });
         };
             if (row.media_type === "M" && row.genre_name === genre_name){
                 MOVArray.push({
                     title: row.title,
                     rating: row.avg_star_rating,
-                    movie_id: row.catalogue_id
+                    movie_id: row.catalogue_id,
+                    poster: row.poster_link
                 });
             };
         });
@@ -87,6 +89,9 @@ async function windowActions()
             html +=`
             <li id = "title"><a href = "./pages/movie-info/movie-info.html">${fullArray[b].title}
             <ul>
+            <img src="${fullArray[b].poster}" alt="Movie Poster id ${fullArray[b].movie_id}"/>
+            </ul>
+            <ul>
             <li id = "star-rating" >${fullArray[b].rating}</li>
             </ul>
             </li>
@@ -100,6 +105,9 @@ async function windowActions()
             TVhtml +=`
             <li id = "title"><a href = "./pages/movie-info/movie-info.html">${TVArray[b].title}
             <ul>
+            <img src="${TVArray[b].poster}" alt="Movie Poster id ${TVArray[b].movie_id}"/>
+            </ul>
+            <ul>
             <li id = "star-rating" >${TVArray[b].rating}</li>
             </ul>
             </li>
@@ -112,6 +120,9 @@ async function windowActions()
             
             MOVhtml +=`
             <li id = "title"><a href = "./pages/movie-info/movie-info.html">${MOVArray[b].title}
+            <ul>
+            <img src="${MOVArray[b].poster}" alt="Movie Poster id ${MOVArray[b].movie_id}"/>
+            </ul>
             <ul>
             <li id = "star-rating" >${MOVArray[b].rating}</li>
             </ul>
@@ -154,7 +165,6 @@ async function windowActions()
             return b.rating - a.rating;
         })
         fullArray.slice(0,20).forEach((a,b) => {
-            console.log(fullArray);
             html +=`
             <li id = "title"><a href = "./pages/movie-info/movie-info.html">${fullArray[b].title}
             <ul>
@@ -167,7 +177,6 @@ async function windowActions()
             `
             
         });
-        console.log(html);
         list.innerHTML = html;
         
         }
@@ -225,7 +234,7 @@ async function windowActions()
                 fullArray.push({
                     title: row.title,
                     rating: row.avg_star_rating,
-                
+                    poster: row.poster_link
                 });
             }
         });
@@ -241,6 +250,9 @@ async function windowActions()
           
             html +=`
             <li id = "title"><a href = "./pages/movie-info/movie-info.html">${fullArray[b].title}
+            <ul>
+            <img src="${fullArray[b].poster}" alt="Movie Poster id ${fullArray[b].movie_id}"/>
+            </ul>
             <ul>
             <li id = "star-rating" >${fullArray[b].rating}</li>
             </ul>
@@ -259,32 +271,30 @@ async function windowActions()
         full.forEach((row) => {
             if (row.media_type ==="M"){
             fullArray.push({
-                
                 title: row.title,
                 rating: row.avg_star_rating,
                 year: row.year,
-                movie_id: row.catalogue_id,
-            
+                poster: row.poster_link
             });
             }
         });
+        console.log(fullArray);
         const list = document.querySelector("#MOVyear");
         let html ="";
         fullArray.sort(function(a,b){
             return b.year - a.year;
         })
         
-        
         fullArray.slice(0,20).forEach((a,b) => {
 
             html +=`
             
-            <li id = "title"><img class = "${fullArray[b].movie_id}"><a href = "./pages/movie-info/movie-info.html">${fullArray[b].title}
+            <li id = "title"><a href = "./pages/movie-info/movie-info.html">${fullArray[b].title}
             <ul>
-            <li id = "star-rating" >${fullArray[b].rating}</li>
+            <img src="${fullArray[b].poster}" alt="Movie Poster id ${fullArray[b].movie_id}"/>
             </ul>
             <ul>
-            <li class = "movie_id"><img src ="$</li>
+            <li id = "star-rating" >${fullArray[b].rating}</li>
             </ul>
             </li>
 
@@ -307,7 +317,7 @@ async function windowActions()
                 fullArray.push({
                     title: row.title,
                     rating: row.avg_star_rating,
-                
+                    poster: row.poster_link
                 });
             }
         });
@@ -323,6 +333,9 @@ async function windowActions()
            
             html +=`
             <li id = "title"><a href = "./pages/movie-info/movie-info.html">${fullArray[b].title}
+            <ul>
+            <img src="${fullArray[b].poster}" alt="Movie Poster id ${fullArray[b].movie_id}"/>
+            </ul>
             <ul>
             <li id = "star-rating" >${fullArray[b].rating}</li>
             </ul>
@@ -344,8 +357,8 @@ async function windowActions()
                 
                 title: row.title,
                 rating: row.avg_star_rating,
-                year: row.year
-            
+                year: row.year,
+                poster: row.poster_link
             });
             }
         });
@@ -360,6 +373,9 @@ async function windowActions()
     
             html +=`
             <li id = "title"><a href = "./pages/movie-info/movie-info.html">${fullArray[b].title}
+            <ul>
+            <img src="${fullArray[b].poster}" alt="Movie Poster id ${fullArray[b].movie_id}"/>
+            </ul>
             <ul>
             <li id = "star-rating" >${fullArray[b].rating}</li>
             </ul>

@@ -38,6 +38,10 @@ const matchArray = findMatches(e.target.value, movies);
     const suggestions = document.querySelector(".suggestions");
 
 searchInput.addEventListener("change", (evt) => { evt.preventDefault(); displayMatches(evt) });
-searchInput.addEventListener("keyup", (evt) => { evt.preventDefault(); displayMatches(evt) });       
+searchInput.addEventListener("keyup", (evt) => { evt.preventDefault(); displayMatches(evt) });    
+
+
+
+
 }
 window.onload = windowActions;
