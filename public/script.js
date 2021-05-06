@@ -2,10 +2,35 @@
 
 async function windowActions()
 {
+    async function getPosterImg(movie_id){
+
+        const endpoint =`/api/movies/${movie_id}`;
+        const request = await fetch(endpoint);
+        const movie = await request.json();
+        
+        
+        const posterID = movie[0]["poster_id"];
+        
+        const endpoint2 = `/api/poster/image/${posterID}`
+        const request2 = await fetch(endpoint2);
+        const poster = await request2.json();
+        const posterIMG = poster[0]["poster_link"];
+        let myImg = document.getElementsByClassName(`${movie_id}`);
+        myImg.src = `${posterIMG}`;
+    }
+    async function posterFill(){
+        const endpoint = "/api/movies";
+        const request = await fetch(endpoint);
+        const full = await request.json();
+        full.forEach((row) => {
+            getPosterImg(row.catalogue_id);
+            
+        });
+    }
     async function genresTab(){
         const endpoint ="/api/genres"
         const request = await fetch(endpoint);
-        const genre = await request.json()
+        const genre = await request.json();
         //console.log(genre.data)
         const list = document.querySelector('#genre')
         
@@ -23,28 +48,52 @@ async function windowActions()
         const request = await fetch(endpoint);
         const full = await request.json();
         const fullArray = [];
- 
+        const TVArray = [];
+        const MOVArray = [];
         const request2 = await fetch(`/api/genre/${genre_id}`)
         const data = await request2.json();
-        console.log(request2)
-        const genre_name = data[0].genre_name
+        
+        const genre_name = data[0].genre_name;
         
         full.forEach((row) => {
-            
-            if (row.genre_name === genre_name)
+            if (row.media_type === "T" && row.genre_name === genre_name){
+            TVArray.push({
+                title: row.title,
+                rating: row.avg_star_rating,
+                movie_id: row.catalogue_id
+            });
+            };
+            if (row.genre_name === genre_name){
             fullArray.push({
                 title: row.title,
-                rating: row.avg_star_rating
+                rating: row.avg_star_rating,
+                movie_id: row.catalogue_id
 
             });
+        };
+            if (row.media_type === "M" && row.genre_name === genre_name){
+                MOVArray.push({
+                    title: row.title,
+                    rating: row.avg_star_rating,
+                    movie_id: row.catalogue_id
+                });
+            };
         });
+        console.log
         const list = document.querySelector("#genre-content");
         let html ="";
-        console.log(fullArray)
-       
+        const MOVlist = document.querySelector("#MOVgenre-content");
+        let MOVhtml ="";
+        const TVlist = document.querySelector("#TVgenre-content");
+        let TVhtml ="";
+     
+        let posterLink;
+        
       
         fullArray.forEach((a,b) => {
-         
+            
+            
+            
             html +=`
             <li id = "title"><a href = "./pages/movie-info/movie-info.html">${fullArray[b].title}
             <ul>
@@ -54,10 +103,44 @@ async function windowActions()
             `
             
         });
-        console.log(html)
+        TVArray.forEach((a,b) => {
+            
+            
+            
+            TVhtml +=`
+            <li id = "title"><a href = "./pages/movie-info/movie-info.html">${TVArray[b].title}
+            <ul>
+            <li id = "star-rating" >${TVArray[b].rating}</li>
+            </ul>
+            </li>
+            `
+            
+        });
+        MOVArray.forEach((a,b) => {
+            
+            
+            
+            MOVhtml +=`
+            <li id = "title"><a href = "./pages/movie-info/movie-info.html">${MOVArray[b].title}
+            <ul>
+            <li id = "star-rating" >${MOVArray[b].rating}</li>
+            </ul>
+            </li>
+            `
+            
+        });
+        if (list !== null){
         list.innerHTML = html;
+        };
+        if (MOVlist !== null){
+        MOVlist.innerHTML = MOVhtml;
+        };        
+        if (TVlist !== null){
+        TVlist.innerHTML = TVhtml;
+        };
         
         }
+        
     
 
     
@@ -184,7 +267,8 @@ async function windowActions()
                 
                 title: row.title,
                 rating: row.avg_star_rating,
-                year: row.year
+                year: row.year,
+                movie_id: row.catalogue_id,
             
             });
             }
@@ -199,9 +283,13 @@ async function windowActions()
         fullArray.slice(0,20).forEach((a,b) => {
          
             html +=`
-            <li id = "title"><a href = "./pages/movie-info/movie-info.html">${fullArray[b].title}
+            
+            <li id = "title"><img class = "${fullArray[b].movie_id}"><a href = "./pages/movie-info/movie-info.html">${fullArray[b].title}
             <ul>
             <li id = "star-rating" >${fullArray[b].rating}</li>
+            </ul>
+            <ul>
+            <li class = "movie_id"></li>
             </ul>
             </li>
 
@@ -337,17 +425,22 @@ getTVRatingsList();
 getFullRatingsList();
 getFullReleaseList(); 
 getMOVRatingsList();
-getMOVReleaseList();    
-const parent_id = '';
+getMOVReleaseList();  
+  
+let parent_id = 1;
+
 document.getElementById("genre").addEventListener("click", (event) =>{
-    if(parent_id != ''){
-        document.getElementById(`${parent_id}`).classList.remove("is-active");
-    };
     const target = event.target;
     const parent = target.parentElement;
+    if(parent_id !== parent.id){
+
+        document.getElementById(`${parent_id}`).classList.remove("is-active");
+    };
+    
     
     
     document.getElementById(`${parent.id}`).classList.add("is-active");
+    
     genresFill(parent.id);
     parent_id = parent.id;
 });
@@ -355,5 +448,6 @@ document.getElementById("genre").addEventListener("click", (event) =>{
 
 
 
+posterFill();
 }
 window.onload = windowActions;
