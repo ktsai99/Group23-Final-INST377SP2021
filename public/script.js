@@ -288,7 +288,7 @@ async function windowActions()
         list.innerHTML = html;
         
         }
-    //Search bar query
+           //Search bar query
 const endpoint = "/api/movies";
 
 const request = await fetch(endpoint);
@@ -324,7 +324,7 @@ const matchArray = findMatches(e.target.value, movies);
     const suggestions = document.querySelector(".suggestions");
 
 searchInput.addEventListener("change", (evt) => { evt.preventDefault(); displayMatches(evt) });
-searchInput.addEventListener("keyup", (evt) => { evt.preventDefault(); displayMatches(evt) });       
+searchInput.addEventListener("keyup", (evt) => { evt.preventDefault(); displayMatches(evt) });
 
 //Carousel code
     let width = 136;
@@ -388,5 +388,9 @@ document.getElementById("genre").addEventListener("click", (event) =>{
     genresFill(parent.id);
     parent_id = parent.id;
 });
+
+
+
+
 }
 window.onload = windowActions;
