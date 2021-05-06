@@ -23,9 +23,9 @@ function displayMatches(e) {
 const matchArray = findMatches(e.target.value, movies);
         const html = matchArray.map(m => {
             return `
-                <li id = "title"><a href = "./pages/movie-info/movie-info.html">
+                <li>
                     <ul>
-                        <li class="address"><a href = "./pages/movie-info/movie-info.html?&id=${m.catalogue_id}"> ${m.title} — ${m.avg_star_rating} ${m.pricing}</li>
+                        <li class="address"><a href = "./movie-info/movie-info.html?&id=${m.catalogue_id}"> ${m.title} — ${m.avg_star_rating} ${m.pricing}</li>
                     </ul>
                 </li>
             `;
