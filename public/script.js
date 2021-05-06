@@ -2,7 +2,7 @@
 
 async function windowActions()
 {
-    async function getPosterImg(movie_id){
+    async function getPosterLink(movie_id){
 
         const endpoint =`/api/movies/${movie_id}`;
         const request = await fetch(endpoint);
@@ -10,25 +10,15 @@ async function windowActions()
         
         
         const posterID = movie[0]["poster_id"];
-        
         const endpoint2 = `/api/poster/image/${posterID}`
         const request2 = await fetch(endpoint2);
         const poster = await request2.json();
-        const posterIMG = poster[0]["poster_link"];
-        let myImg = document.getElementsByClassName(`${movie_id}`);
-        myImg.src = `${posterIMG}`;
+        const posterIMG = poster[0].poster_link;
+        return posterIMG;
     }
-    async function posterFill(){
-        const endpoint = "/api/movies";
-        const request = await fetch(endpoint);
-        const full = await request.json();
-        full.forEach((row) => {
-            getPosterImg(row.catalogue_id);
-            
-        });
-    }
+
     async function genresTab(){
-        const endpoint ="/api/genres"
+        const endpoint ="/api/genres";
         const request = await fetch(endpoint);
         const genre = await request.json();
         //console.log(genre.data)
@@ -154,8 +144,8 @@ async function windowActions()
         full.forEach((row) => {
             fullArray.push({
                 title: row.title,
-                rating: row.avg_star_rating
-
+                rating: row.avg_star_rating,
+                poster: row.poster_link
             });
         });
         const list = document.querySelector("#rating");
@@ -163,12 +153,13 @@ async function windowActions()
         fullArray.sort(function(a,b){
             return b.rating - a.rating;
         })
-       
-      
         fullArray.slice(0,20).forEach((a,b) => {
-         
+            console.log(fullArray);
             html +=`
             <li id = "title"><a href = "./pages/movie-info/movie-info.html">${fullArray[b].title}
+            <ul>
+            <img src="${fullArray[b].poster}" alt="Movie Poster id ${fullArray[b].movie_id}"/>
+            </ul>
             <ul>
             <li id = "star-rating" >${fullArray[b].rating}</li>
             </ul>
@@ -176,6 +167,7 @@ async function windowActions()
             `
             
         });
+        console.log(html);
         list.innerHTML = html;
         
         }
@@ -190,8 +182,8 @@ async function windowActions()
             fullArray.push({
                 title: row.title,
                 rating: row.avg_star_rating,
-                year: row.year
-
+                year: row.year,
+                poster: row.poster_link
             });
         });
         const list = document.querySelector("#year");
@@ -205,6 +197,9 @@ async function windowActions()
            
             html +=`
             <li id = "title"><a href = "./pages/movie-info/movie-info.html">${fullArray[b].title}
+            <ul>
+            <img src="${fullArray[b].poster}" alt="Movie Poster id ${fullArray[b].movie_id}"/>
+            </ul>
             <ul>
             <li id = "star-rating" >${fullArray[b].rating}</li>
             </ul>
@@ -278,10 +273,10 @@ async function windowActions()
         fullArray.sort(function(a,b){
             return b.year - a.year;
         })
-    
+        
         
         fullArray.slice(0,20).forEach((a,b) => {
-         
+
             html +=`
             
             <li id = "title"><img class = "${fullArray[b].movie_id}"><a href = "./pages/movie-info/movie-info.html">${fullArray[b].title}
@@ -289,7 +284,7 @@ async function windowActions()
             <li id = "star-rating" >${fullArray[b].rating}</li>
             </ul>
             <ul>
-            <li class = "movie_id"></li>
+            <li class = "movie_id"><img src ="$</li>
             </ul>
             </li>
 
@@ -445,9 +440,5 @@ document.getElementById("genre").addEventListener("click", (event) =>{
     parent_id = parent.id;
 });
 
-
-
-
-posterFill();
 }
 window.onload = windowActions;

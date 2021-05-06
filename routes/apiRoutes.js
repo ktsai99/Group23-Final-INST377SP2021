@@ -56,10 +56,11 @@ router.post('/transaction', async (req, res) =>
 //
 
 // Get all movies
-const moviesCustom = `SELECT tm.*, tl.trailer_link, \`description\`, \`g\`.\`genre_name\`, co.purchase_count, co.rental_count
+const moviesCustom = `SELECT tm.*, tl.trailer_link, pr.poster_link, \`description\`, \`g\`.\`genre_name\`, co.purchase_count, co.rental_count
 FROM \`tv_movie\` tm JOIN \`descriptions\` USING (catalogue_id)
 JOIN \`counts\` co USING (catalogue_id)
 JOIN \`trailer\` tl USING (catalogue_id)
+JOIN \`poster\` pr USING (poster_id)
 JOIN \`categories\` c ON tm.category_id = c.category_id
 JOIN \`genre\` g ON c.genre_id = g.genre_id;`
 
