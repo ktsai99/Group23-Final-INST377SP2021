@@ -207,3 +207,7 @@ h1 {
   color: #25AD81;
   font-size: large;
 }
+
+.button.is-info.is-light {
+  width: 50%;
+}
