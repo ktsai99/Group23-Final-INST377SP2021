@@ -35,6 +35,15 @@ async function windowActions(){
         }
     }
 
+    //Movie confirm overlay
+    const button = document.getElementById('48hr');
+
+// When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+  if (event.target == modal) {
+    button.style.display = "none";
+  }
+}
 
     console.log(URL_ID)
     populateMovieInfo(URL_ID);
