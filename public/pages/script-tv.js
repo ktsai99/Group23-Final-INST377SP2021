@@ -32,7 +32,7 @@ async function windowActions()
         fullArray.forEach((a,b) => {
            
             html +=`
-            <li id = "title"><a href = "./pages/movie-info/movie-info.html?&id=${fullArray[b].movie_id}">${fullArray[b].title}
+            <li id = "title"><a href = "movie-info/movie-info.html?&id=${fullArray[b].movie_id}">${fullArray[b].title}
             <ul>
             <img src="${fullArray[b].poster}" alt="Movie Poster id ${fullArray[b].catalogue_id}"/>
             </ul>
@@ -74,7 +74,7 @@ async function windowActions()
         fullArray.slice(0,20).forEach((a,b) => {
     
             html +=`
-            <li id = "title"><a href = "./pages/movie-info/movie-info.html?&id=${fullArray[b].movie_id}">${fullArray[b].title}
+            <li id = "title"><a href = "movie-info/movie-info.html?&id=${fullArray[b].movie_id}">${fullArray[b].title}
             <ul>
             <img src="${fullArray[b].poster}" alt="Movie Poster id ${fullArray[b].catalogue_id}"/>
             </ul>
