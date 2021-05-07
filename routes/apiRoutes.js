@@ -103,13 +103,18 @@ router.get('/movies', async (req, res) =>
 // Get a specifc movie by id
 router.get('/movies/:movie_id', async (req, res) => 
 {
+<<<<<<< Updated upstream
 const moviesCustomId = `SELECT tm.*, tl.trailer_link, pr.poster_link, \`description\`, \`g\`.\`genre_name\`, co.purchase_count, co.rental_count
+=======
+const moviesCustomId = `SELECT tm.*, aa.rating_description, tl.trailer_link, \`description\`, \`g\`.\`genre_name\`, co.purchase_count, co.rental_count
+>>>>>>> Stashed changes
 FROM \`tv_movie\` tm JOIN \`descriptions\` USING (catalogue_id)
 JOIN \`counts\` co USING (catalogue_id)
 JOIN \`trailer\` tl USING (catalogue_id)
 JOIN \`poster\` pr USING (poster_id)
 JOIN \`categories\` c ON tm.category_id = c.category_id
 JOIN \`genre\` g ON c.genre_id = g.genre_id
+JOIN \`approved_audience\` aa USING(rating_id)
 WHERE catalogue_id = ${req.params.movie_id};`;
 
 try 
