@@ -12,14 +12,22 @@ async function windowActions(){
         const request2 = await fetch(movieEndpoint);
         const poster = await request.json();
         const info = await request2.json();
-        console.log(info);
         
         document.querySelector("#movie-poster").href = poster[0].poster_link;
         document.querySelector("#movie-poster-img").src = poster[0].poster_link;
 
         const table = document.getElementById("info-table");
-        console.log(table);
-        document.getElementById('Trailer').innerHTML = info[0].trailer_link;
+
+        //embed function for trailer 
+        const embed = function(url) {
+            const id = url.split("?v=")[1]; //sGbxmsDFVnE
+            console.log(id);
+            const embedlink = "https://www.youtube.com/embed/" + id; //https://www.youtube.com/embed/sGbxmsDFVnE
+            console.log(embedlink);
+            document.getElementById('myIframe').src = embedlink;
+        }
+       
+        document.getElementById('Trailer').innerHTML = `<iframe id="myIframe" width="560" height="315" frameborder="0" allowfullscreen></iframe>`;
         document.getElementById('Title').innerHTML = info[0].title;
         document.getElementById('ViewerRating').innerHTML = info[0].rating_description;
         document.getElementById('Rating').innerHTML = info[0].avg_star_rating;
@@ -28,6 +36,7 @@ async function windowActions(){
         document.getElementById('Description').innerHTML = info[0].description;
         document.getElementById('rented').innerHTML = info[0].rental_count;
         document.getElementById('purchased').innerHTML = info[0].purchase_count;
+        embed(info[0].trailer_link);
 
         if(info[0].media_type == "T"){
             document.getElementById('Seasons').innerHTML = info[0].seasons;
