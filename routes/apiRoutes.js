@@ -362,22 +362,6 @@ router.get('/genre/:genre_id', async (req, res) =>
 // Invoices Endpoints
 //
 
-// Get all invoices
-router.get('/invoices', async (req, res) => 
-{
-  try 
-  {
-    const invoices = await db.Invoices.findAll();
-    const reply = invoices.length > 0 ? { data: invoices } : { message: 'no results found' };
-    res.json(reply);
-  } 
-  catch (err) 
-  {
-    console.error(err);
-    res.error('Server error');
-  }
-});
-
 // Get a specifc invoice by id
 router.get('/invoices/:invoice_id', async (req, res) => 
 {
@@ -403,24 +387,6 @@ router.get('/invoices/:invoice_id', async (req, res) =>
 // Poster/Trailer endpoints
 //
 
-//Get all poster images
-router.get('/poster/image', async(req,res) =>
-{
-  try
-  {
-    const result = await db.sequelizeDB.query("SELECT * FROM \`poster\`",
-      {
-        type: sequelize.QueryTypes.SELECT
-      });
-    res.json(result);
-  }
-  catch (err)
-  {
-    console.error(err);
-    res.error('Server error');
-  }
-});
-
 // Get a poster by id
 router.get('/poster/image/:poster_id', async (req, res) => 
 {
@@ -440,22 +406,6 @@ router.get('/poster/image/:poster_id', async (req, res) =>
 });
 
 // Don't know if we should really be exposing things like this, but the assignment said to make all records available.
-
-// Get all rental info
-router.get('/rentals', async (req, res) => 
-{
-  try 
-  {
-    const rentals = await db.Rental.findAll();
-    const reply = rentals.length > 0 ? { data: rentals } : { message: 'no results found' };
-    res.json(reply);
-  } 
-  catch (err) 
-  {
-    console.error(err);
-    res.error('Server error');
-  }
-});
 
 // Get a specifc rental by confirmation number
 router.get('/rentals/:confirmation_number', async (req, res) => 
@@ -519,47 +469,6 @@ router.put('/rentals', async (req, res) =>
       }
     );
     res.send('Rental info Successfully Updated.');
-  } 
-  catch (err) 
-  {
-    console.error(err);
-    res.error('Server error');
-  }
-});
-
-
-
-// Studio
-
-// Get all studios
-router.get('/studios', async (req, res) => 
-{
-  try 
-  {
-    const studios = await db.Studios.findAll();
-    const reply = studios.length > 0 ? { data: studios } : { message: 'no results found' };
-    res.json(reply);
-  } 
-  catch (err) 
-  {
-    console.error(err);
-    res.error('Server error');
-  }
-});
-
-// Get a specifc studio by id
-router.get('/studios/:studio_id', async (req, res) => 
-{
-  try 
-  {
-    const studio = await db.Studios.findAll({
-      where: 
-      {
-        studio_id: req.params.studio_id
-      }
-    });
-
-    res.json(studio);
   } 
   catch (err) 
   {
