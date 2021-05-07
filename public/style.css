@@ -1,6 +1,6 @@
 body{
-position: absolute;
-width: 1440px;
+position: relative;
+width: relative;
 height: relative;
 background-color: #C3F7E7;
 color: #25AD81;
@@ -24,7 +24,7 @@ h2{
 .carousel 
 {
   position: relative;
-  width: 1440px;
+  width: relative;
   height: 300px;
   padding: 0px 40px;
   border: 1px solid #CCC;
@@ -85,7 +85,7 @@ h2{
   }
 
 .gallery{
-    width: 1360px;
+    width: relative;
     height: 350px;
     overflow: hidden;
 }
@@ -121,7 +121,13 @@ li#title {
    
 
   }
+  
+    .tabs ul {
+      flex-shrink: 1;
+      flex-wrap: wrap;
 
+    }
+  
   .tabs {
     background-color: #C3F7E7;
   }
@@ -165,6 +171,51 @@ li#title {
   padding-top: 30px;
 }
 
-/* element {
+.abt-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  max-width: 1440px;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  flex-direction: row;
+  background-color: #25AD81;
+  border: 2px solid #F88061;
+}
+
+p {
   color: #C3F7E7;
+  padding: 10px;
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
+  font-size: xx-large;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  background-color: #C3F7E7;
+  color: #25AD81;
+  font-size: large;
+}
+
+
+/* @media screen and (max-width: 500px) {
+  .box {
+    justify-content: center;
+    flex: 1 0 auto;
+    margin-right: 0px;
+    width: 50%
+  }
+  h1 {
+    text-align: center;
+  }
 } */
