@@ -32,12 +32,9 @@ async function windowActions()
         fullArray.forEach((a,b) => {
            
             html +=`
-            <li id = "title"><a href = "./pages/movie-info/movie-info.html?&id=${fullArray[b].movie_id}">${fullArray[b].title}
+            <li id = "title"><a href = "movie-info/movie-info.html?&id=${fullArray[b].movie_id}">${fullArray[b].title}
             <ul>
             <img src="${fullArray[b].poster}" alt="Movie Poster id ${fullArray[b].catalogue_id}"/>
-            </ul>
-            <ul>
-            <li id = "star-rating" >${fullArray[b].rating}</li>
             </ul>
             </li>
             `
@@ -74,12 +71,9 @@ async function windowActions()
         fullArray.slice(0,20).forEach((a,b) => {
     
             html +=`
-            <li id = "title"><a href = "./pages/movie-info/movie-info.html?&id=${fullArray[b].movie_id}">${fullArray[b].title}
+            <li id = "title"><a href = "movie-info/movie-info.html?&id=${fullArray[b].movie_id}">${fullArray[b].title}
             <ul>
             <img src="${fullArray[b].poster}" alt="Movie Poster id ${fullArray[b].catalogue_id}"/>
-            </ul>
-            <ul>
-            <li id = "star-rating" >${fullArray[b].rating}</li>
             </ul>
             </li>
             `
@@ -89,6 +83,46 @@ async function windowActions()
         
         }
 
+        //Carousel code
+    let width = 136;
+    let count = 1;
+    
+    let list = document.querySelector(".first");
+    let list2 = document.querySelector(".second");
+    let listElms = document.querySelectorAll("li#title");
+
+    let position = 0; // scroll position
+
+        document.querySelector('.prev').onclick = function() {
+        // shift left
+        position += width * count;
+        // can't move to the left too much, end of images
+        position = Math.min(position, 0)
+        list.style.marginLeft = position + 'px';
+        };
+        
+        document.querySelector('.next').onclick = function() {
+            // shift right
+            position -= width * count;
+            // can only shift the ribbbon for (total ribbon length - visible count) images
+            position = Math.max(position, -width * (9 + count));
+            list.style.marginLeft = position + 'px';
+          };
+          document.querySelector('.prev2').onclick = function() {
+            // shift left
+            position += width * count;
+            // can't move to the left too much, end of images
+            position = Math.min(position, 0)
+            list2.style.marginLeft = position + 'px';
+            };
+            
+            document.querySelector('.next2').onclick = function() {
+                // shift right
+                position -= width * count;
+                // can only shift the ribbbon for (total ribbon length - visible count) images
+                position = Math.max(position, -width * (9 + count));
+                list2.style.marginLeft = position + 'px';
+              };
     getTVRatingsList();
     getTVReleaseList();
 }

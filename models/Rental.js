@@ -7,6 +7,7 @@ export default (database, DataTypes) =>
         {
           type: DataTypes.BIGINT.UNSIGNED,
           allowNull: false,
+          autoIncrement: true,
           primaryKey: true
         },
         invoice_id: 

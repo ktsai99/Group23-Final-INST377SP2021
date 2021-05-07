@@ -1,7 +1,7 @@
 body{
-position: absolute;
-width: 1440px;
-height: 700px;
+position: relative;
+width: relative;
+height: relative;
 background-color: #C3F7E7;
 color: #25AD81;
 font-family: 'Quicksand', sans-serif;
@@ -24,8 +24,8 @@ h2{
 .carousel 
 {
   position: relative;
-  width: 1440px;
-  height: 350px;
+  width: relative;
+  height: 300px;
   padding: 0px 40px;
   border: 1px solid #CCC;
   border-radius: 15px;
@@ -85,7 +85,7 @@ h2{
   }
 
 .gallery{
-    width: 1360px;
+    width: relative;
     height: 350px;
     overflow: hidden;
 }
@@ -100,6 +100,8 @@ h2{
   }
 
 li#title {
+  width: 132px;
+  height: 200px;
     display: inline-block;
     
   }
@@ -113,10 +115,19 @@ li#title {
     font-size: 1;
     }
   ul#genre-content{
+   
     
     text-align: center;
-  }
+   
 
+  }
+  
+    .tabs ul {
+      flex-shrink: 1;
+      flex-wrap: wrap;
+
+    }
+  
   .tabs {
     background-color: #C3F7E7;
   }
