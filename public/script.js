@@ -121,7 +121,6 @@ async function windowActions()
             MOVhtml +=`
             <li id = "title"><a href = "./pages/movie-info/movie-info.html">${MOVArray[b].title}
             <ul>
-            <img src="${MOVArray[b].poster}" alt="Movie Poster id ${MOVArray[b].movie_id}"/>
             </ul>
             <ul>
             <li id = "star-rating" >${MOVArray[b].rating}</li>
