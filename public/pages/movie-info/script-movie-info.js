@@ -9,8 +9,8 @@ async function windowActions(){
         const request = await fetch(endpoint);
         const poster = await request.json();
         
-        document.querySelector("#movie-poster").href = poster[0]["poster_link"];
-        document.querySelector("#movie-poster-img").src = poster[0]["poster_link"];
+        document.querySelector("#movie-poster").href = poster[0].poster_link;
+        document.querySelector("#movie-poster-img").src = poster[0].poster_link;
     }
 
     console.log(URL_ID)
