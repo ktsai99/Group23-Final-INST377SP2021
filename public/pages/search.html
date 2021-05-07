@@ -4,10 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hello Bulma!</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
     <link rel="stylesheet" href="../style.css"/>
   </head>
   <body>
+      
         <div class="tabs is-boxed is-large">
           <ul>
             <li><a href="../index.html">Home</a></li>
@@ -16,12 +19,13 @@
             <li class="is-active"></a>Search</li>
           </ul>
       </div>
+      <div class = "divider"></div>
       <form class="search-form">
-        <div class="control">
+        <div class="control is-loading">
           <input
-            class="input is-large search"
+            class="input is-rounded is-large search"
             type="text"
-            placeholder="Enter Name here..."
+            placeholder="Enter Title"
           />
         </div>
       </form>

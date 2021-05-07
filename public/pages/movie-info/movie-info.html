@@ -3,13 +3,15 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>movie info page</title>
+    <title>Movie Info Page</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
     <link rel="stylesheet" href="./style-movie-info.css"/>
   </head>
   <body>
-    <div class = "container">
-        <div class="tabs is-boxed is-large">
+    <!-- <div class = "container is-max-widescreen"> -->
+        <div class="tabs is-large is-boxed">
           <ul>
             <li><a href= "../../index.html">Home</a></li>
             <li><a href="../tv.html">TV</a></li>
@@ -17,6 +19,9 @@
             <li><a href="../genre.html">Genre</a></li>
             <li><a href="../search.html">Search</a></li>
           </ul>
+          <form id="search-form" class="block">
+            <input id="search" type="text" class="input is-rounded" name="input" placeholder="Search by Title"/>
+          </form>
         </div>
     </div>
     <div class="columns">
@@ -77,7 +82,7 @@
     <div class="box">Movie 6</div>
     <div class="box">Movie 7</div>
     </div>
-    </div>
+    <!-- </div> -->
   </body>
   <script src="script-movie-info.js"></script>
 </html>
