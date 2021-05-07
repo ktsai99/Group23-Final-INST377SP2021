@@ -36,9 +36,6 @@ async function windowActions()
             <ul>
             <img src="${fullArray[b].poster}" alt="Movie Poster id ${fullArray[b].catalogue_id}"/>
             </ul>
-            <ul>
-            <li id = "star-rating" >${fullArray[b].rating}</li>
-            </ul>
             </li>
             `
             
@@ -77,9 +74,6 @@ async function windowActions()
             <li id = "title"><a href = "movie-info/movie-info.html?&id=${fullArray[b].movie_id}">${fullArray[b].title}
             <ul>
             <img src="${fullArray[b].poster}" alt="Movie Poster id ${fullArray[b].catalogue_id}"/>
-            </ul>
-            <ul>
-            <li id = "star-rating" >${fullArray[b].rating}</li>
             </ul>
             </li>
             `

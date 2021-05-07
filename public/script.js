@@ -91,9 +91,6 @@ async function windowActions()
             <ul>
             <img src="${fullArray[b].poster}" alt="Movie Poster id ${fullArray[b].movie_id}"/>
             </ul>
-            <ul>
-            <li id = "star-rating" >${fullArray[b].rating}</li>
-            </ul>
             </li>
             `
             
@@ -107,9 +104,6 @@ async function windowActions()
             <ul>
             <img src="${TVArray[b].poster}" alt="Movie Poster id ${TVArray[b].movie_id}"/>
             </ul>
-            <ul>
-            <li id = "star-rating" >${TVArray[b].rating}</li>
-            </ul>
             </li>
             `
             
@@ -121,9 +115,6 @@ async function windowActions()
             MOVhtml +=`
             <li id = "title"><a href = "./pages/movie-info/movie-info.html">${MOVArray[b].title}
             <ul>
-            </ul>
-            <ul>
-            <li id = "star-rating" >${MOVArray[b].rating}</li>
             </ul>
             </li>
             `
@@ -170,9 +161,6 @@ async function windowActions()
             <ul>
             <img src="${fullArray[b].poster}" alt="Movie Poster id ${fullArray[b].catalogue_id}"/>
             </ul>
-            <ul>
-            <li id = "star-rating" >${fullArray[b].rating}</li>
-            </ul>
             </li>
             `
             
@@ -209,9 +197,6 @@ async function windowActions()
             <li id = "title"><a href = "./pages/movie-info/movie-info.html?&id=${fullArray[b].movie_id}">${fullArray[b].title}
             <ul>
             <img src="${fullArray[b].poster}" alt="Movie Poster id ${fullArray[b].movie_id}"/>
-            </ul>
-            <ul>
-            <li id = "star-rating" >${fullArray[b].rating}</li>
             </ul>
             </li>
 

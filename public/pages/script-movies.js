@@ -54,9 +54,6 @@ async function windowActions()
             <ul>
             <img src="${MOVArray[b].poster}" alt="Movie Poster id ${MOVArray[b].movie_id}"/>
             </ul>
-            <ul>
-            <li id = "star-rating" >${MOVArray[b].rating}</li>
-            </ul>
             </li>
             `
             
@@ -100,9 +97,6 @@ async function getMOVReleaseList(){
             <ul>
             <img src="${fullArray[b].poster}" alt="Movie Poster id ${fullArray[b].catalogue_id}"/>
             </ul>
-            <ul>
-            <li id = "star-rating" >${fullArray[b].rating}</li>
-            </ul>
             </li>
         `
         
@@ -144,9 +138,6 @@ async function getMOVReleaseList(){
             <li id = "title"><a href = "./movie-info/movie-info.html?&id=${fullArray[b].movie_id}">${fullArray[b].title}
             <ul>
             <img src="${fullArray[b].poster}" alt="Movie Poster id ${fullArray[b].catalogue_id}"/>
-            </ul>
-            <ul>
-            <li id = "star-rating" >${fullArray[b].rating}</li>
             </ul>
             </li>
             `
