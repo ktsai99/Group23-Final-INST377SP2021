@@ -26,7 +26,10 @@ const matchArray = findMatches(e.target.value, movies);
             <li>
                 <li id = "title"><a href = "movie-info/movie-info.html">
                     <ul>
-                        <li class="address"><a href = "movie-info/movie-info.html?&id=${m.catalogue_id}"> ${m.title} — ${m.avg_star_rating} ${m.pricing}</li>
+                        <img src="${m.poster_link}" alt="Movie Poster id ${m.catalogue_id}"/>
+                    </ul>
+                    <ul>
+                        <li class="address"><a href = "movie-info/movie-info.html?&id=${m.catalogue_id}"> ${m.title}</li>
                     </ul>
                 </li>
             </li>
