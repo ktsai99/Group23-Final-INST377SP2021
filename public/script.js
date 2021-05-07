@@ -2,21 +2,6 @@
 
 async function windowActions()
 {
-    async function getPosterLink(movie_id){
-
-        const endpoint =`/api/movies/${movie_id}`;
-        const request = await fetch(endpoint);
-        const movie = await request.json();
-        
-        
-        const posterID = movie[0]["poster_id"];
-        const endpoint2 = `/api/poster/image/${posterID}`
-        const request2 = await fetch(endpoint2);
-        const poster = await request2.json();
-        const posterIMG = poster[0].poster_link;
-        return posterIMG;
-    }
-
     async function genresTab(){
         const endpoint ="/api/genres";
         const request = await fetch(endpoint);
@@ -34,6 +19,7 @@ async function windowActions()
         list.innerHTML = html;
         console.log(html)
     }
+
     async function genresFill(genre_id){
         const endpoint = "/api/movies";
         const request = await fetch(endpoint);
@@ -83,11 +69,6 @@ async function windowActions()
     
     }
         
-        
-        
-    
-
-    
     async function getFullRatingsList(){
         const endpoint = "/api/movies";
         const request = await fetch(endpoint);
@@ -161,7 +142,7 @@ async function windowActions()
         }
 
 
-//Carousel code
+    //Carousel code
     let width = 136;
     let count = 1;
     
