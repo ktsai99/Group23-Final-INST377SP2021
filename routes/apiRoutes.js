@@ -21,7 +21,6 @@ router.post('/transaction', async (req, res) =>
   try 
   {
     const newInvoice = await db.Invoices.create({
-      customer_id: 1,
       credit_total: req.body.credit_total,
       invoice_date: now,
       invoice_total: req.body.invoice_total

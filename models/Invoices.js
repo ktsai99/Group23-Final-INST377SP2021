@@ -9,11 +9,6 @@ export default (database, DataTypes) => {
         primaryKey: true,
         autoIncrement: true
       },
-      customer_id: 
-      {
-        type: DataTypes.INTEGER,
-        allowNull: false
-      },
       credit_total: 
       {
         type: DataTypes.DECIMAL(3,2),
