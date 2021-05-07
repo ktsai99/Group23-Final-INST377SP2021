@@ -228,7 +228,24 @@ div#cancel.button.button.is-info.is-light:hover{
   color: #C3F7E7;
 }
 
-div#yes.button.button.is-info.is-light:hover{
+div#yes.button.button.is-info.is-light {
   background-color: #25AD81;
   color: #C3F7E7;
+}
+
+div#yes.button.button.is-info.is-light{
+  background-color: #25AD81;
+  color: #C3F7E7;
+}
+
+div#yes.button.button.is-info.is-light:hover{
+  background-color: #1d8d6a;
+  color: #C3F7E7;
+}
+
+.card.is-rounded {
+  background-color: #C3F7E7;
+  border: none;
+  width: 400px;
+  
 }
