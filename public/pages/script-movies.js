@@ -189,5 +189,6 @@ async function getMOVReleaseList(){
               };
     getMOVRatingsList();
     getMOVReleaseList();
+
 }
 window.onload = windowActions;
