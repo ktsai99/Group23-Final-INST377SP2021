@@ -26,6 +26,8 @@ async function windowActions(){
         document.getElementById('Genre').innerHTML = info[0].genre_name;
         document.getElementById('Year').innerHTML = info[0].year;
         document.getElementById('Description').innerHTML = info[0].description;
+        document.getElementById('rented').innerHTML = info[0].rental_count;
+        document.getElementById('purchased').innerHTML = info[0].purchase_count;
 
         if(info[0].media_type == "T"){
             document.getElementById('Seasons').innerHTML = info[0].seasons;
