@@ -165,21 +165,45 @@ li#title {
   color: #F88061
 }
 
+
 .divider {
-  padding-top: 50px;
+  padding-top: 30px;
+}
+
+.abt-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 350px;
+  max-width: 1440px;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  flex-direction: row;
+  background-color: #25AD81;
+  border: 2px solid #F88061;
+  min-width: 360px;
+}
+
+p {
+  color: #C3F7E7;
+  padding: 10px;
 }
 
 .input {
-  width:max-content;
+  width:100%;
 }
 
 .divider {
   padding-top: 30px;
 }
 
-/* element {
+element {
   color: #C3F7E7;
-<<<<<<< Updated upstream
+/* <<<<<<< Updated upstream */
   padding: 10px;
 }
 
@@ -221,7 +245,6 @@ div#yes.button.button.is-info.is-light {
   background-color: #25AD81;
   color: #C3F7E7;
 }
-<<<<<<< HEAD
 
 div#yes.button.button.is-info.is-light{
   background-color: #25AD81;
@@ -239,8 +262,4 @@ div#yes.button.button.is-info.is-light:hover{
   width: 400px;
   
 }
-=======
-=======
-} */
->>>>>>> Stashed changes
 >>>>>>> c2bebbc8722ac5f89805d5abb21c780c39891858
