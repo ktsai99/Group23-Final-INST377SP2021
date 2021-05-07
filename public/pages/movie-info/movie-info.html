@@ -1,98 +1,107 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Movie Info Page</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
-    <link rel="stylesheet" href="./style-movie-info.css"/>
-  </head>
-  <body>
-    <!-- <div class = "container is-max-widescreen"> -->
-        <div class="tabs is-large is-boxed">
-          <ul>
-            <li><a href= "../../index.html">Home</a></li>
-            <li><a href="../tv.html">TV</a></li>
-            <li><a href="../movies.html">Movies</a></li>
-            <li><a href="../genre.html">Genre</a></li>
-            <li><a href="../search.html">Search</a></li>
-          </ul>
-        </div>
-    </div>
-    <div class="columns">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Movie Info Page</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+  <link rel="stylesheet" href="./style-movie-info.css" />
+</head>
+
+<body>
+  <!-- <div class = "container is-max-widescreen"> -->
+  <div class="tabs is-large is-boxed">
+    <ul>
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../tv.html">TV</a></li>
+      <li><a href="../movies.html">Movies</a></li>
+      <li><a href="../genre.html">Genre</a></li>
+      <li><a href="../search.html">Search</a></li>
+    </ul>
+  </div>
+  </div>
+  <div class="columns">
     <div class="column is-one-third">
       <section class="section">
-      <div class="header">
-      <h1>Movie Information</h1>
-          <a href="popcorn-pic.jpeg" id="movie-poster"><img src="popcorn-pic-th.jpeg" alt="Placeholder picture for movie" id="movie-poster-img"></a>
+        <div class="header">
+          <h1>Movie Information</h1>
+          <a href="popcorn-pic.jpeg" id="movie-poster"><img src="popcorn-pic-th.jpeg"
+              alt="Placeholder picture for movie" id="movie-poster-img"></a>
         </div>
         <div class="view-options">Viewing Options</div>
-        <div class= "button is-info is-light" name="48hr" id="48hr">48 Hour Stream Rental</div>
-        <div class= "button is-info is-light" name="2week" id="2week">2 Week Physical Rental</div>
-        <div class= "button is-info is-light" name="own" id="own">Purchase to Own</div>
+        <div class="button is-info is-light" name="48hr" id="48hr">48 Hour Stream Rental</div>
+        <div class="button is-info is-light" name="2week" id="2week">2 Week Physical Rental</div>
+        <div class="button is-info is-light" name="own" id="own">Purchase to Own</div>
     </div>
     <div class="column">
-        <section class="section">
-      <table class="table" id="info-table">
+      <section class="section">
+        <table class="table" id="info-table">
           <thead>
-              <tr>
-                  <th>Details</th>
-                  <th></th>
-              </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <td>Trailer</td>
-                <td id="Trailer"></td>
-                </tr>
-                <tr>
-                  <td>Title</td>
-                  <td id="Title"></td>
-                  </tr>
-                <tr>
-                    <td>Viewer Rating</td>
-                    <td id="ViewerRating"></td>
-                </tr>
-                <tr>
-                    <td>Rating</td>
-                    <td id="Rating"></td>
-                </tr>
-                <tr>
-                    <td>Genre</td>
-                    <td id="Genre"></td>
-                </tr>
-                <tr>
-                  <td>Year</td>
-                  <td id="Year"></td>
-              </tr>
-              <tr>
-                <td>Seasons</td>
-                <td id="Seasons"></td>
+            <tr>
+              <th>Details</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Trailer</td>
+              <td id="Trailer"></td>
+            </tr>
+            <tr>
+              <td>Title</td>
+              <td id="Title"></td>
+            </tr>
+            <tr>
+              <td>Viewer Rating</td>
+              <td id="ViewerRating"></td>
+            </tr>
+            <tr>
+              <td>Rating</td>
+              <td id="Rating"></td>
+            </tr>
+            <tr>
+              <td>Genre</td>
+              <td id="Genre"></td>
+            </tr>
+            <tr>
+              <td>Year</td>
+              <td id="Year"></td>
+            </tr>
+            <tr>
+              <td>Seasons</td>
+              <td id="Seasons"></td>
             </tr>
             <tr>
               <td>Episodes</td>
               <td id="Episodes"></td>
-          </tr>
-                <tr>
-                    <td>Description</td>
-                    <td id="Description"></td>
-                </tr>
-            </tbody>
-      </table>
-    </section>
-    <h2>You Might Also Like</h2>
-    <div class="box">Movie 1</div>
-    <div class="box">Movie 2</div>
-    <div class="box">Movie 3</div>
-    <div class="box">Movie 4</div>
-    <div class="box">Movie 5</div>
-    <div class="box">Movie 6</div>
-    <div class="box">Movie 7</div>
+            </tr>
+            <tr>
+              <td>Description</td>
+              <td id="Description"></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <h2>You Might Also Like</h2>
+      <div class="box">Movie 1</div>
+      <div class="box">Movie 2</div>
+      <div class="box">Movie 3</div>
+      <div class="box">Movie 4</div>
+      <div class="box">Movie 5</div>
+      <div class="box">Movie 6</div>
+      <div class="box">Movie 7</div>
     </div>
     <!-- </div> -->
     <!-- Popup and Overlay confirmation-->
+    <!-- code credits to https://www.experts-exchange.com/articles/28838/Create-a-responsive-confirmation-popup-using-HTML-CSS-jQuery-and-Promises.html -->
+
+
+
+
     <div class="overlay">
       <div class="popup">
         <p>This is the message</p>
@@ -111,6 +120,15 @@
       </div>
     </div>
 
-  </body>
-  <script src="script-movie-info.js"></script>
+
+</body>
+<script src="script-movie-info.js"></script>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script>
+  $(function () {
+    $(".48hr").click(function () {
+      $('.popup').animate({ top: '15%' }, 1000);
+    });
+  });
+</script>
 </html>

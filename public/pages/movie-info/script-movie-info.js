@@ -35,8 +35,10 @@ async function windowActions(){
         }
     }
 
-    console.log(URL_ID)
+    async function 
 
+
+    console.log(URL_ID)
     populateMovieInfo(URL_ID);
 }
 window.onload = windowActions;
