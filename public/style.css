@@ -1,7 +1,7 @@
 body{
 position: absolute;
 width: 1440px;
-height: 700px;
+height: relative;
 background-color: #C3F7E7;
 color: #25AD81;
 font-family: 'Quicksand', sans-serif;
@@ -100,6 +100,8 @@ h2{
   }
 
 li#title {
+  width: 132px;
+  height: 200px;
     display: inline-block;
     
   }
@@ -113,8 +115,11 @@ li#title {
     font-size: 1;
     }
   ul#genre-content{
+   
     
     text-align: center;
+   
+
   }
 
   .tabs {
