@@ -78,10 +78,13 @@ body {
     color: #F88061;
 }
 
+.tabs.is-large a{
+  color: #25AD81;
+}
+
 .tabs.is-large{
     border-bottom: solid;
     border-color: #F88061;
-    color: #25AD81
 }
 
 .input.is-rounded {
