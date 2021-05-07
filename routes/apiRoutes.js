@@ -18,23 +18,18 @@ router.post('/transaction', async (req, res) =>
 {
   const invoices = await db.Invoices.findAll();
   const rentals = await db.Rental.findAll();
-  const currentInvoiceId = (await invoices.length) + 1;
-  const currentRentalId = (await rentals.length) + 1;
   const now = Sequelize.fn('NOW');
 
   try 
   {
     const newInvoice = await db.Invoices.create({
-      //invoice_id: currentInvoiceId,
       customer_id: 1,
       credit_total: req.body.credit_total,
       invoice_date: now,
       invoice_total: req.body.invoice_total
     });
-    //console.log(newInvoice);
 
     const newRental = await db.Rental.create({
-      confirmation_num: currentRentalId,
       invoice_id: newInvoice.dataValues.invoice_id,
       catalogue_id: req.body.catalogue_id,
       purchase_type: req.body.purchase_type,
