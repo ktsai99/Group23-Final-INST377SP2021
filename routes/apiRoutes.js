@@ -154,97 +154,6 @@ WHERE catalogue_id BETWEEN ${req.params.range_start} AND ${req.params.range_end}
   }
 });
 
-// Search for movies other variables, such as name, etc. Handle this here or on front-end?
-
-// Add a new Movie to database
-router.post('/movies', async (req, res) => 
-{
-  const movies = await db.Movies.findAll();
-  const currentId = (await movies.length) + 1;
-  try 
-  {
-    // What is the point of category id
-    // Code validation maybe?
-    const newMovie = await db.Movies.create({
-      catalogue_id: currentId,
-      category_id: req.body.category_id,
-      movie_title: req.body.movie_title,
-      pricing: req.body.pricing,
-      year: req.body.year,
-      duration: req.body.duration,
-      episodes: req.body.episodes,
-      seasons: req.body.seasons,
-      avg_star_rating: req.body.avg_star_rating,
-      media_type: req.body.media_type,
-      rating_id: req.body.rating_id,
-      studio_id: req.body.studio_id
-    });
-    res.json(newMovie);
-  } 
-  
-  catch (err) 
-  {
-    console.error(err);
-    res.error('Server error');
-  }
-});
-
-// Delete a movie from the database
-router.delete('/movies/:movie_id', async (req, res) => 
-{
-  try 
-  {
-    await db.Movies.destroy({
-      where: 
-      {
-        catalogue_id: req.params.movie_id
-      }
-    });
-    res.send('Successfully Deleted');
-  } 
-  catch (err) 
-  {
-    console.error(err);
-    res.error('Server error');
-  }
-});
-
-// Update a movie in the database
-router.put('/movies', async (req, res) => 
-{
-  try 
-  {
-    await db.Movies.update(
-      {
-        category_id: req.body.category_id,
-        movie_title: req.body.movie_title,
-        pricing: req.body.pricing,
-        year: req.body.year,
-        duration: req.body.duration,
-        episodes: req.body.episodes,
-        seasons: req.body.seasons,
-        avg_star_rating: req.body.avg_star_rating,
-        media_type: req.body.media_type,
-        rating_id: req.body.rating_id,
-        studio_id: req.body.studio_id
-      },
-      {
-        where: 
-        {
-          catalogue_id: req.body.movie_id
-        }
-      }
-    );
-    res.send('Successfully Updated');
-  } 
-  
-  catch (err) 
-  {
-    console.error(err);
-    res.error('Server error');
-  }
-});
-
 //
 // Counts Endpoints
 //
@@ -305,22 +214,6 @@ router.get('/movies/description/:catalouge_id', async (req, res) =>
 //
 // Ratings Endpoints
 //
-
-// Get all ratings
-router.get('/ratings', async (req, res) => 
-{
-  try 
-  {
-    const ratings = await db.Movies.findAll();
-    const reply = ratings.length > 0 ? { data: ratings } : { message: 'no results found' };
-    res.json(reply);
-  } 
-  catch (err) 
-  {
-    console.error(err);
-    res.error('Server error');
-  }
-});
 
 // Get a specifc rating by id
 router.get('/ratings/:rating_id', async (req, res) => 
@@ -465,67 +358,11 @@ router.get('/invoices/:invoice_id', async (req, res) =>
   }
 });
 
-// Add a new invoice
-router.post('/invoices', async (req, res) => 
-{
-  const invoices = await db.Invoices.findAll();
-  const currentId = (await invoices.length) + 1;
-  try 
-  {
-    const newInvoice = await db.Invoices.create({
-      invoice_id: currentId,
-      customer_id: 1,
-      credit_total: req.body.credit_total,
-      invoice_date: Sequelize.fn('NOW'),
-      invoice_total: req.body.invoice_total
-    });
-    res.json(newInvoice);
-  }
-  catch(err) 
-  {
-    console.error(err);
-    res.send("Server error");
-  }
-});
-
-// Update an invoice
-router.put('/invoices', async (req, res) => 
-{
-  try 
-  {
-    await db.Invoices.update(
-      {
-        customer_id: 1,
-        credit_total: req.body.credit_total,
-        invoice_date: req.body.invoice_date,
-        invoice_total: req.body.invoice_total
-      },
-      {
-        where: 
-        {
-          invoice_id: req.body.invoice_id
-        }
-      }
-    );
-    res.send('Invoice Successfully Updated.');
-  } 
-  catch (err) 
-  {
-    console.error(err);
-    res.error('Server error');
-  }
-});
-
 //
 // Poster/Trailer endpoints
 //
 
 //Get all poster images
-
-
-//
-// Rental info
-//
 router.get('/poster/image', async(req,res) =>
 {
   try
@@ -621,29 +458,6 @@ router.get('/rentals/invoice_id/:invoice_id', async (req, res) =>
   }
 });
 
-// Add a new rental record
-router.post('/rentals', async (req, res) => 
-{
-  const rentals = await db.Rental.findAll();
-  const currentId = (await rentals.length) + 1;
-  try 
-  {
-    const newRental = await db.Rental.create({
-      confirmation_num: currentId,
-      invoice_id: req.body.invoice_id,
-      catalouge_id: req.body.catalogue_id,
-      purchase_type: req.body.purchase_type,
-      purchase_date: Sequelize.fn('NOW')
-    });
-    res.json(newRental);
-  }
-  catch(err) 
-  {
-    console.error(err);
-    res.error('Server error');
-  }
-});
-
 
 // Update a rental record
 router.put('/rentals', async (req, res) => 
@@ -713,20 +527,4 @@ router.get('/studios/:studio_id', async (req, res) =>
   }
 });
 
-// Testing endpoint - make sure to remove before final submission
-const testCustom = 'SELECT * FROM `genre`';
-router.get('/test', async (req, res) => 
-{
-  try 
-  {
-    const result = await db.sequelizeDB.query(testCustom, {
-      type: sequelize.QueryTypes.SELECT
-    });
-    res.json(result);
-  } 
-  catch (err) {
-    console.error(err);
-    res.error('Server error');
-  }
-});
 export default router;
