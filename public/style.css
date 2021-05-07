@@ -6,6 +6,12 @@ background-color: #C3F7E7;
 color: #25AD81;
 font-family: 'Quicksand', sans-serif;
 }
+img.logo{
+  width: 60px;
+  height: 60px;
+  top: 50px;
+}
+
 
 h2{
     position: relative;
@@ -114,43 +120,43 @@ li#title {
     transition: margin-left 250ms;
     font-size: 1;
     }
-ul#genre-content{
-  
-  
-  text-align: center;
-  
-
-}
-
-  .tabs ul {
-    flex-shrink: 1;
-    flex-wrap: wrap;
+  ul#genre-content{
+   
+    
+    text-align: center;
+   
 
   }
+  
+    .tabs ul {
+      flex-shrink: 1;
+      flex-wrap: wrap;
 
-.tabs {
-  background-color: #C3F7E7;
+    }
+  
+  .tabs {
+    background-color: #C3F7E7;
+  }
+
+  .tabs.is-large a:hover {
+    background-color: #C3F7E7;
+    color: #F88061;
 }
 
-.tabs.is-large a:hover {
-  background-color: #C3F7E7;
-  color: #F88061;
+  .tabs.is-large {
+    border-bottom: solid;
+    border-color: #F88061;
 }
 
-.tabs.is-large {
-  border-bottom: solid;
-  border-color: #F88061;
-}
+  .tabs.is-large a{
+    color: #25AD81;
+    background-color: #C3F7E7;
+  }
 
-.tabs.is-large a{
-  color: #25AD81;
-  background-color: #C3F7E7;
-}
-
-.tabs.is-boxed li.is-active a{
-  background-color: #C3F7E7;
-  border-color: #C3F7E7;
-  color: #F88061
+  .tabs.is-boxed li.is-active a{
+    background-color: #C3F7E7;
+    border-color: #C3F7E7;
+    color: #F88061
 }
 
 .tabs.is-boxed li.is-active {
@@ -164,33 +170,16 @@ ul#genre-content{
 }
 
 .input {
-  width: 100%;
+  width:max-content;
 }
 
 .divider {
   padding-top: 30px;
 }
 
-.abt-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 350px;
-  max-width: 1440px;
-}
-
-.card {
-  display: flex;
-  align-items: center;
-  width: 50%;
-  flex-direction: row;
-  background-color: #25AD81;
-  border: 2px solid #F88061;
-  min-width: 360px;
-}
-
-p {
+/* element {
   color: #C3F7E7;
+<<<<<<< Updated upstream
   padding: 10px;
 }
 
@@ -232,3 +221,6 @@ div#yes.button.button.is-info.is-light:hover{
   background-color: #25AD81;
   color: #C3F7E7;
 }
+=======
+} */
+>>>>>>> Stashed changes
