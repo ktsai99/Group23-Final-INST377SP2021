@@ -1,6 +1,13 @@
-# This is your readme
-You are required to fill it in with documentation similar to that found in the Sequelize example for the course as part of your final project.
+# Entertainment Rental System
 
-### How to use Markdown
-Markdown is a text notation system used in Discord, Whatsapp and similar to structure pages without writing HTML at all. You'll be using it for your documentation.
-* [Markdown guide](https://www.markdownguide.org/cheat-sheet/)
+## Description
+Lorem ipsum
+
+![image](https://raw.githubusercontent.com/ktsai99/Group23-Final-INST377SP2021/main/image.png)
+
+## Link to Website
+[https://group23-final.herokuapp.com/](https://group23-final.herokuapp.com/)
+
+## Target Browsers
+* Windows NT 7/8/10
+* Samsung Galaxy S8/9/10
