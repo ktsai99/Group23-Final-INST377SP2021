@@ -35,8 +35,6 @@ async function windowActions(){
         }
     }
 
-    async function 
-
 
     console.log(URL_ID)
     populateMovieInfo(URL_ID);
