@@ -38,15 +38,6 @@ async function windowActions(){
         }
     }
 
-    //Movie confirm overlay
-    const button = document.getElementById('48hr');
-
-// When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-  if (event.target == modal) {
-    button.style.display = "none";
-  }
-}
 
     document.getElementById("48hr").onclick = async function() {
         
@@ -63,6 +54,8 @@ async function windowActions(){
             }});
             const res = await request.json();
             //console.log(res);
+
+            window.location.href =`/pages/confirmation.html?id=${URL_ID}&i_id=${res["invoice_id"]}&type=R`;
       };
 
       document.getElementById("2week").onclick = async function() {
@@ -80,6 +73,8 @@ async function windowActions(){
         }});
         const res = await request.json();
         //console.log(res);
+
+        window.location.href =`/pages/confirmation.html?id=${URL_ID}&i_id=${res["invoice_id"]}&type=R`;
   };
 
   document.getElementById("own").onclick = async function() {
@@ -97,6 +92,8 @@ async function windowActions(){
     }});
     const res = await request.json();
     //console.log(res);
+
+    window.location.href =`/pages/confirmation.html?id=${URL_ID}&i_id=${res["invoice_id"]}&type=P`;
 };
 
     //console.log(URL_ID)

@@ -61,7 +61,7 @@ router.delete('/transaction/:invoice_id', async (req, res) =>
       }
     });
 
-    res.send('Successfully Deleted');
+    res.json('Successfully Deleted');
   } 
   catch (err) 
   {
@@ -159,28 +159,69 @@ WHERE catalogue_id BETWEEN ${req.params.range_start} AND ${req.params.range_end}
 //
 
 // Update a count record
-router.put('/counts', async (req, res) => 
+router.put('/count/r/:c_id', async (req, res) => 
 {
   try 
   {
+    const c = await db.Counts.findAll({
+      where: 
+      {
+        catalogue_id: req.params.c_id
+      }
+    });
+    
+    console.log(c[0].dataValues);
+
     await db.Counts.update(
       {
-        purchase_count: req.body.purchase_count,
-        rental_count: req.body.rental_count
+        rental_count: c[0].dataValues.rental_count + 1
       },
       {
         where: 
         {
-          catalogue_id: req.body.catalogue_id
+          catalogue_id: req.params.c_id
         }
       }
     );
-    res.send('Count Successfully Updated');
+    res.json('Count Successfully Updated');
   } 
   catch (err) 
   {
     console.error(err);
-    res.error('Server error');
+    res.send('Server error');
+  }
+});
+
+router.put('/count/p/:c_id', async (req, res) => 
+{
+  try 
+  {
+    const c = await db.Counts.findAll({
+      where: 
+      {
+        catalogue_id: req.params.c_id
+      }
+    });
+    
+    console.log(c[0].dataValues);
+
+    await db.Counts.update(
+      {
+        purchase_count: c[0].dataValues.purchase_count + 1
+      },
+      {
+        where: 
+        {
+          catalogue_id: req.params.c_id
+        }
+      }
+    );
+    res.json('Count Successfully Updated');
+  } 
+  catch (err) 
+  {
+    console.error(err);
+    res.send('Server error');
   }
 });
 
