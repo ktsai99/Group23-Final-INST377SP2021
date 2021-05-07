@@ -210,4 +210,25 @@ h1 {
 
 .button.is-info.is-light {
   width: 50%;
+  color: #25AD81;
+
+}
+
+.button.is-info.is-light:hover {
+  background-color: #25AD81;
+}
+
+div#cancel.button.button.is-info.is-light{
+  background-color: #F88061;
+  color: #C3F7E7;
+}
+
+div#cancel.button.button.is-info.is-light:hover{
+  background-color: #f8572e;
+  color: #C3F7E7;
+}
+
+div#yes.button.button.is-info.is-light:hover{
+  background-color: #25AD81;
+  color: #C3F7E7;
 }
