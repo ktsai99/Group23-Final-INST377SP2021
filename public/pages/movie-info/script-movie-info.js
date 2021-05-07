@@ -2,6 +2,7 @@ async function windowActions(){
     const URLQuery = window.location.search;
     const URLParam = new URLSearchParams(URLQuery);
     const URL_ID = URLParam.get('id');
+    let lastId;
     
     async function populateMovieInfo(movie_id)
     {
@@ -45,7 +46,61 @@ async function windowActions(){
   }
 }
 
-    console.log(URL_ID)
+    document.getElementById("48hr").onclick = async function() {
+        
+            const endpoint =`/api/transaction`;
+            const request = await fetch(endpoint, {method: 'POST',
+            body: JSON.stringify({
+                catalogue_id: URL_ID,
+                invoice_total: 1.00,
+                credit_total: 0.00,
+                purchase_type: "R"
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            }});
+            const res = await request.json();
+            //console.log(res);
+      };
+
+      document.getElementById("2week").onclick = async function() {
+        
+        const endpoint =`/api/transaction`;
+        const request = await fetch(endpoint, {method: 'POST',
+        body: JSON.stringify({
+            catalogue_id: URL_ID,
+            invoice_total: 5.00,
+            credit_total: 0.00,
+            purchase_type: "R"
+        }),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8'
+        }});
+        const res = await request.json();
+        //console.log(res);
+  };
+
+  document.getElementById("own").onclick = async function() {
+        
+    const endpoint =`/api/transaction`;
+    const request = await fetch(endpoint, {method: 'POST',
+    body: JSON.stringify({
+        catalogue_id: URL_ID,
+        invoice_total: 15.00,
+        credit_total: 0.00,
+        purchase_type: "P"
+    }),
+    headers: {
+        'Content-type': 'application/json; charset=UTF-8'
+    }});
+    const res = await request.json();
+    //console.log(res);
+};
+
+    //console.log(URL_ID)
     populateMovieInfo(URL_ID);
+
+    
+
 }
 window.onload = windowActions;
