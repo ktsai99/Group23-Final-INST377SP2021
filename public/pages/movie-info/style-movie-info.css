@@ -95,16 +95,3 @@ body {
 }
 
 /* popup CSS credits to https://www.experts-exchange.com/articles/28838/Create-a-responsive-confirmation-popup-using-HTML-CSS-jQuery-and-Promises.html*/
-.popup {
-    width: 33.333333%;
-    padding: 15px;
-    left: 0;
-    margin-left: 33.333333%;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background: white;
-    position: absolute;
-    top: 15%;
-    box-shadow: 5px 5px 5px #000;
-    z-index: 10001;
-  }
