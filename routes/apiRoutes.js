@@ -12,7 +12,7 @@ router.get('/', (req, res) =>
 });
 
 //
-// Transaction Endpoint
+// Transaction Endpoints
 //
 router.post('/transaction', async (req, res) => 
 {
@@ -25,24 +25,24 @@ router.post('/transaction', async (req, res) =>
   try 
   {
     const newInvoice = await db.Invoices.create({
-      invoice_id: currentInvoiceId,
+      //invoice_id: currentInvoiceId,
       customer_id: 1,
       credit_total: req.body.credit_total,
       invoice_date: now,
       invoice_total: req.body.invoice_total
     });
-    //res.json(newInvoice);
+    //console.log(newInvoice);
 
     const newRental = await db.Rental.create({
       confirmation_num: currentRentalId,
-      invoice_id: currentInvoiceId,
+      invoice_id: newInvoice.dataValues.invoice_id,
       catalogue_id: req.body.catalogue_id,
       purchase_type: req.body.purchase_type,
       purchase_date: now
     });
     res.json(newRental);
   }
-  
+
   catch(err) 
   {
     console.error(err);
@@ -50,6 +50,33 @@ router.post('/transaction', async (req, res) =>
   }
 });
 
+
+router.delete('/transaction/:invoice_id', async (req, res) => 
+{
+  try 
+  {
+    await db.Rental.destroy({
+      where: 
+      {
+        invoice_id: req.params.invoice_id
+      }
+    });
+
+    await db.Invoices.destroy({
+      where: 
+      {
+        invoice_id: req.params.invoice_id
+      }
+    });
+
+    res.send('Successfully Deleted');
+  } 
+  catch (err) 
+  {
+    console.error(err);
+    res.error('Server error');
+  }
+});
 
 //
 // Movies Endpoints

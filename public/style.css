@@ -12,7 +12,6 @@ h2{
     font-size: xx-large;
     top: 150 px;
     
-
 }
 
 .block{
@@ -38,6 +37,14 @@ h2{
   width: 132px;
   height: 200px;
   text-align: center;
+}
+
+.carousel li a{
+  color: #C3F7E7;
+}
+
+.carousel li a:hover{
+  background-color: #F88061;
 }
 
 .arrow {
@@ -152,3 +159,7 @@ li#title {
 .divider {
   padding-top: 30px;
 }
+
+/* element {
+  color: #C3F7E7;
+} */
