@@ -13,7 +13,7 @@ export default (database, DataTypes) =>
                 type: DataTypes.TEXT,
                 allowNull: false
             },
-            trailer_link:
+            hdposter_link:
             {
                 type: DataTypes.TEXT,
                 allowNull: false
