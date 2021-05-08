@@ -262,3 +262,6 @@ div#yes.button.button.is-info.is-light:hover{
   width: 400px;
   
 }
+section.hero.is-small.is-primary {
+  background-color: #25AD81;
+}

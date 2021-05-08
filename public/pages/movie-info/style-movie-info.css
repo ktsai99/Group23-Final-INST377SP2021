@@ -97,6 +97,16 @@ body {
     color: #F88061;
 }
 
+section.hero.is-small.is-primary {
+  background-color: #25AD81;
+}
+
+img.logo{
+  width: 60px;
+  height: 60px;
+  top: 50px;
+}
+
 /* popup and overlay CSS credits to https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_delete_modal*/
 
 button {
