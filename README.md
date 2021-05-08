@@ -7,7 +7,7 @@ Additionally, invididuals with low bandwidth may be unable to stream content eff
 Our project aims to give users options to physically rent, stream, or purchase to own. 
 This flexibility which is not present on popular platforms can cater to individuals' movie and television watching preferences.
 
-![image](https://raw.githubusercontent.com/ktsai99/Group23-Final-INST377SP2021/main/image.png)
+![image](https://raw.githubusercontent.com/ktsai99/Group23-Final-INST377SP2021/main/Capture1.PNG)
 
 ## Link to Website
 [https://group23-final.herokuapp.com/](https://group23-final.herokuapp.com/)
