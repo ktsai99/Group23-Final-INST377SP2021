@@ -265,3 +265,7 @@ div#yes.button.button.is-info.is-light:hover{
 section.hero.is-small.is-primary {
   background-color: #25AD81;
 }
+
+.search-form {
+  padding-bottom: 10px;
+}
