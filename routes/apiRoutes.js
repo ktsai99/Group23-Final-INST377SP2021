@@ -14,6 +14,8 @@ router.get('/', (req, res) =>
 //
 // Transaction Endpoints
 //
+
+// Create a new transaction
 router.post('/transaction', async (req, res) => 
 {
   const now = Sequelize.fn('NOW');
@@ -42,7 +44,7 @@ router.post('/transaction', async (req, res) =>
   }
 });
 
-
+// Delete a transaction
 router.delete('/transaction/:invoice_id', async (req, res) => 
 {
   try 
@@ -158,7 +160,7 @@ WHERE catalogue_id BETWEEN ${req.params.range_start} AND ${req.params.range_end}
 // Counts Endpoints
 //
 
-// Update a count record
+// Update a rental count record
 router.put('/count/r/:c_id', async (req, res) => 
 {
   try 
@@ -169,8 +171,6 @@ router.put('/count/r/:c_id', async (req, res) =>
         catalogue_id: req.params.c_id
       }
     });
-    
-    console.log(c[0].dataValues);
 
     await db.Counts.update(
       {
@@ -192,6 +192,7 @@ router.put('/count/r/:c_id', async (req, res) =>
   }
 });
 
+// Update a purchase count record
 router.put('/count/p/:c_id', async (req, res) => 
 {
   try 
@@ -202,8 +203,6 @@ router.put('/count/p/:c_id', async (req, res) =>
         catalogue_id: req.params.c_id
       }
     });
-    
-    console.log(c[0].dataValues);
 
     await db.Counts.update(
       {
@@ -222,98 +221,6 @@ router.put('/count/p/:c_id', async (req, res) =>
   {
     console.error(err);
     res.send('Server error');
-  }
-});
-
-//
-// Descriptions Endpoints
-//
-
-// Get a specific movie description by catalogue id
-router.get('/movies/description/:catalouge_id', async (req, res) => 
-{
-  try 
-  {
-    const description = await db.Descriptions.findAll({
-      where: 
-      {
-        catalogue_id: req.params.catalouge_id
-      }
-    });
-    res.json(description);
-  } 
-  
-  catch (err) 
-  {
-    console.error(err);
-    res.send(err);
-  }
-});
-
-// Endpoints to pass all other database records to front end
-
-//
-// Ratings Endpoints
-//
-
-// Get a specifc rating by id
-router.get('/ratings/:rating_id', async (req, res) => 
-{
-  try 
-  {
-    const rating = await db.Movies.findAll({
-      where: 
-      {
-        rating_id: req.params.rating_id
-      }
-    });
-
-    res.json(rating);
-  } 
-  catch (err) 
-  {
-    console.error(err);
-    res.error('Server error');
-  }
-});
-
-//
-// Categories Endpoints
-//
-
-// Get all categories
-router.get('/categories', async (req, res) => 
-{
-  try 
-  {
-    const result = await db.sequelizeDB.query("SELECT * FROM \`categories\`", 
-      {
-        type: sequelize.QueryTypes.SELECT
-      });
-    res.json(result);
-  } 
-  catch (err) 
-  {
-    console.error(err);
-    res.error('Server error');
-  }
-});
-
-// Get a specifc category by id
-router.get('/categories/:cat_id', async (req, res) => 
-{
-  try 
-  {
-    const result = await db.sequelizeDB.query(`SELECT * FROM \`categories\` WHERE \`category_id\` = ${req.params.category_id};`, 
-      {
-        type: sequelize.QueryTypes.SELECT
-      });
-    res.json(result);
-  } 
-  catch (err) 
-  {
-    console.error(err);
-    res.error('Server error');
   }
 });
 
@@ -359,31 +266,6 @@ router.get('/genre/:genre_id', async (req, res) =>
 });
 
 //
-// Invoices Endpoints
-//
-
-// Get a specifc invoice by id
-router.get('/invoices/:invoice_id', async (req, res) => 
-{
-  try 
-  {
-    const invoice = await db.Invoices.findAll({
-      where: 
-      {
-        invoice_id: req.params.invoice_id
-      }
-    });
-
-    res.json(invoice);
-  } 
-  catch (err) 
-  {
-    console.error(err);
-    res.error('Server error');
-  }
-});
-
-//
 // Poster/Trailer endpoints
 //
 
@@ -397,78 +279,6 @@ router.get('/poster/image/:poster_id', async (req, res) =>
         type: sequelize.QueryTypes.SELECT
       });
     res.json(result);
-  } 
-  catch (err) 
-  {
-    console.error(err);
-    res.error('Server error');
-  }
-});
-
-// Don't know if we should really be exposing things like this, but the assignment said to make all records available.
-
-// Get a specifc rental by confirmation number
-router.get('/rentals/:confirmation_number', async (req, res) => 
-{
-  try 
-  {
-    const rental = await db.Rental_info.findAll({
-      where: 
-      {
-        confirmation_num: req.params.confirmation_number
-      }
-    });
-
-    res.json(rental);
-  } 
-  catch (err) 
-  {
-    console.error(err);
-    res.error('Server error');
-  }
-});
-
-// Get a specific rental record by invoice_id
-router.get('/rentals/invoice_id/:invoice_id', async (req, res) => 
-{
-  try 
-  {
-    const rental = await db.Rental.findAll({
-      where: 
-      {
-        invoice_id: req.params.invoice_id
-      }
-    });
-
-    res.json(rental);
-  } 
-  catch (err) 
-  {
-    console.error(err);
-    res.send(err);
-  }
-});
-
-
-// Update a rental record
-router.put('/rentals', async (req, res) => 
-{
-  try 
-  {
-    await db.Rental.update(
-      {
-      invoice_id: req.body.invoice_id,
-      catalouge_id: req.body.catalogue_id,
-      purchase_type: req.body.purchase_type,
-      purchase_date: req.body.purchase_date
-      },
-      {
-        where: {
-          confirmation_num: req.body.confirmation_num
-        }
-      }
-    );
-    res.send('Rental info Successfully Updated.');
   } 
   catch (err) 
   {
