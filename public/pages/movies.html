@@ -1,70 +1,63 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Browse Movies</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
-    <link rel="stylesheet" href="../style.css"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="../style.css" />
   </head>
   <body>
     <section class="hero is-small is-primary">
       <div class="container has-text-centered">
-      <div class="hero-body">
-        <p class="title" > 
-          Green<img class = "logo" src="https://img.icons8.com/pastel-glyph/2x/26e07f/open-delivered-box.png">Box
-        </p>
-        
-      </div>
+        <div class="hero-body">
+          <p class="title">
+            Green<img
+              class="logo"
+              src="https://img.icons8.com/pastel-glyph/2x/26e07f/open-delivered-box.png"
+            />Box
+          </p>
+        </div>
       </div>
     </section>
-        <div class="tabs is-boxed is-large">
-          <ul>
-            <li><a href="../index.html">Home</a></li>
-            <li><a href="./tv.html">TV</a></li>
-            <li class="is-active"><a>Movies</a></li>
-            <li><a href="./search.html">Search</a></li>
-            <li><a href="./about.html">About</a></li>
-            
-          </ul>
-         
-        
-        
-      </div>
-      <div class="divider"></div>
-      <h2>Top Rated</h2>
-      <div id="carousel" class="carousel">
-        <button class = "arrow prev">&#8656;</button>
-        <div class = "gallery">
-          <ul class = "first" id = "MOVrating">
-
-          </ul>
-        </div>
-        <button class = "arrow next">&#8658;</button>
-      </div>
-      <h2>New Release</h2>
-      <div id="carousel" class="carousel">
-        <button class = "arrow prev2">&#8656;</button>
-        <div class = "gallery">
-          <ul class= "second" id = "MOVyear">
-
-
-          </ul>
-        </div>
-        <button class = "arrow next2">&#8658;</button>
-      </div>
-      <div class="tabs is-boxed is-medium is-centered">
-        <ul id = "genre">
-          
-          
-        </ul>
-      </div>
-      <ul id = "MOVgenre-content">
-
+    <div class="tabs is-boxed is-large">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="./tv.html">TV</a></li>
+        <li class="is-active"><a>Movies</a></li>
+        <li><a href="./search.html">Search</a></li>
+        <li><a href="./about.html">About</a></li>
       </ul>
-      <script src="script-movies.js"></script>
+    </div>
+    <div class="divider"></div>
+    <h2>Top Rated</h2>
+    <div id="carousel" class="carousel">
+      <button class="arrow prev">&#8656;</button>
+      <div class="gallery">
+        <ul class="first" id="MOVrating"></ul>
+      </div>
+      <button class="arrow next">&#8658;</button>
+    </div>
+    <h2>New Release</h2>
+    <div id="carousel" class="carousel">
+      <button class="arrow prev2">&#8656;</button>
+      <div class="gallery">
+        <ul class="second" id="MOVyear"></ul>
+      </div>
+      <button class="arrow next2">&#8658;</button>
+    </div>
+    <div class="tabs is-boxed is-medium is-centered">
+      <ul id="genre"></ul>
+    </div>
+    <ul id="MOVgenre-content"></ul>
+    <script src="script-movies.js"></script>
   </body>
-  
 </html>
