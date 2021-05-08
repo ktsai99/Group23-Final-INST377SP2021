@@ -274,7 +274,7 @@ router.get('/poster/image/:poster_id', async (req, res) =>
 {
   try 
   {
-    const result = await db.sequelizeDB.query(`SELECT poster_link FROM \`poster\` WHERE \`poster_id\` = ${req.params.poster_id};`, 
+    const result = await db.sequelizeDB.query(`SELECT poster_link, hdposter_link FROM \`poster\` WHERE \`poster_id\` = ${req.params.poster_id};`, 
       {
         type: sequelize.QueryTypes.SELECT
       });

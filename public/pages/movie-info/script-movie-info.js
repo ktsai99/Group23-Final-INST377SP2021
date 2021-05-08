@@ -13,8 +13,9 @@ async function windowActions(){
         const poster = await request.json();
         const info = await request2.json();
         
-        document.querySelector("#movie-poster").href = poster[0].poster_link;
-        document.querySelector("#movie-poster-img").src = poster[0].poster_link;
+        //console.log(poster[0]);
+        document.querySelector("#movie-poster").href = poster[0].hdposter_link;
+        document.querySelector("#movie-poster-img").src = poster[0].hdposter_link;
 
         const table = document.getElementById("info-table");
 
