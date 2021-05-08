@@ -11,8 +11,6 @@ async function windowActions()
         const endpoint =`/api/transaction/${URL_invoice_id}`;
         const request = await fetch(endpoint, {method: 'DELETE'});
         const res = await request.json();
-        //console.log(res);
-    
         window.location.href = "/";
     };
 
@@ -21,8 +19,6 @@ async function windowActions()
         const endpoint =`/api/count/${URL_type}/${URL_movie_id}`;
         const request = await fetch(endpoint, {method: 'PUT'});
         const res = await request.json();
-        //console.log(res);
-    
         window.location.href = "/";
     };
 }

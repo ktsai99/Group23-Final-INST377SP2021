@@ -81,8 +81,6 @@ async function windowActions(){
             'Content-type': 'application/json; charset=UTF-8'
         }});
         const res = await request.json();
-        //console.log(res);
-
         window.location.href =`/pages/confirmation.html?id=${URL_ID}&i_id=${res["invoice_id"]}&type=R`;
   };
 
@@ -100,15 +98,8 @@ async function windowActions(){
         'Content-type': 'application/json; charset=UTF-8'
     }});
     const res = await request.json();
-    //console.log(res);
-
     window.location.href =`/pages/confirmation.html?id=${URL_ID}&i_id=${res["invoice_id"]}&type=P`;
 };
-
-    //console.log(URL_ID)
     populateMovieInfo(URL_ID);
-
-    
-
 }
 window.onload = windowActions;
