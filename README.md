@@ -17,7 +17,7 @@ This flexibility which is not present on popular platforms can cater to individu
 * Samsung Galaxy S8/9/10
 
 ## Links
-* [Developer Manual]()
+* [Developer Manual](https://github.com/ktsai99/Group23-Final-INST377SP2021#developer-manual)
 
 # Developer Manual
 ## How to install application and all dependencies
